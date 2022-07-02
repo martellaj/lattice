@@ -26,7 +26,7 @@ export default function Board({ tilePositions }) {
     <div
       style={{
         width: '100%',
-        height: '700px',
+        height: '100%',
         display: 'flex',
         flexWrap: 'wrap',
         maxHeight: '500px'
