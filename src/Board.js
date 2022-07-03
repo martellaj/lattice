@@ -3,6 +3,8 @@ import Square from "./Square";
 import Tile from "./Tile";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
+import isMobile from "./isMobile";
 
 function SquareWrapper({ i, tiles, onTileMoved }) {
   const x = i % 8;
@@ -36,8 +38,10 @@ export default function Board({ tiles, onTileMoved }) {
     );
   }
 
+  const backend = isMobile() ? TouchBackend : HTML5Backend;
+
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={backend}>
       <div
         style={{
           width: "100%",
