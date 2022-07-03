@@ -20,15 +20,83 @@ appHeight();
 
 const rows = 8;
 
+const TILES = [
+  {
+    letter: "R",
+    id: guid(),
+    x: 64 % rows,
+    y: Math.floor(64 / rows),
+  },
+  {
+    letter: "F",
+    id: guid(),
+    x: 65 % rows,
+    y: Math.floor(65 / rows),
+  },
+  {
+    letter: "H",
+    id: guid(),
+    x: 66 % rows,
+    y: Math.floor(66 / rows),
+  },
+  {
+    letter: "T",
+    id: guid(),
+    x: 67 % rows,
+    y: Math.floor(67 / rows),
+  },
+  {
+    letter: "B",
+    id: guid(),
+    x: 68 % rows,
+    y: Math.floor(68 / rows),
+  },
+  {
+    letter: "M",
+    id: guid(),
+    x: 69 % rows,
+    y: Math.floor(69 / rows),
+  },
+  {
+    letter: "L",
+    id: guid(),
+    x: 70 % rows,
+    y: Math.floor(70 / rows),
+  },
+  {
+    letter: "H",
+    id: guid(),
+    x: 71 % rows,
+    y: Math.floor(71 / rows),
+  },
+  {
+    letter: "T",
+    id: guid(),
+    x: 72 % rows,
+    y: Math.floor(72 / rows),
+  },
+  {
+    letter: "E",
+    id: guid(),
+    x: 73 % rows,
+    y: Math.floor(73 / rows),
+  },
+  {
+    letter: "O",
+    id: guid(),
+    x: 74 % rows,
+    y: Math.floor(74 / rows),
+  },
+  {
+    letter: "I",
+    id: guid(),
+    x: 75 % rows,
+    y: Math.floor(75 / rows),
+  },
+];
+
 function App() {
-  const [tiles, updateTiles] = useState([
-    {
-      letter: "A",
-      id: guid(),
-      x: 64 % rows,
-      y: Math.floor(64 / rows),
-    },
-  ]);
+  const [tiles, updateTiles] = useState(TILES);
 
   const onTileMoved = (dropTarget, letter, x, y, prevX, prevY, id) => {
     if (dropTarget === "board") {

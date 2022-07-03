@@ -1,5 +1,5 @@
 body {
-  background-color: #25273c;
+  background-color: #161722;
 
   margin: 0;
   font-family: "Spinnaker", sans-serif;
@@ -22,4 +22,20 @@ body {
 
 .ui.modal {
   top: 20% !important;
+}
+
+.boardButton {
+  align-items: center;
+  background-color: #cacde8 !important;
+  border-radius: 10% !important;
+  color: #161722 !important;
+  cursor: pointer;
+  display: flex !important;
+  font-size: xx-large !important;
+  height: 90% !important;
+  justify-content: center !important;
+  letter-spacing: 0.2rem !important;
+  width: 90% !important;
+  margin: 0 !important;
+  box-shadow: inset #e4e5f1 2px 2px;
 }

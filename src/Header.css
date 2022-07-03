@@ -1,6 +1,4 @@
 .headerContainer {
-  height: 50px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,6 +24,7 @@
   letter-spacing: 0.2rem !important;
   align-items: center;
   font-size: 20px !important;
+  box-shadow: inset #e4e5f1 2px 2px;
 }
 
 .headerSubtext {

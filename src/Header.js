@@ -19,7 +19,7 @@ function Header() {
           style={{
             cursor: "pointer",
             marginRight: "12px",
-            marginLeft: "12px",
+            marginLeft: "6px",
           }}
           name="help"
           className="button headerButton"
@@ -29,7 +29,7 @@ function Header() {
         <Icon
           style={{
             cursor: "pointer",
-            marginRight: "12px",
+            marginRight: "6px",
             marginLeft: "12px",
             visibility: "hidden",
           }}

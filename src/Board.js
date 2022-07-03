@@ -5,6 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import isMobile from "./isMobile";
+import { Icon } from "semantic-ui-react";
 
 function SquareWrapper({ i, tiles, onTileMoved }) {
   const x = i % 8;
@@ -43,10 +44,66 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
 
 export default function Board({ tiles, onTileMoved }) {
   const squares = [];
-  for (let i = 0; i < 64 + 16; i++) {
-    squares.push(
-      <SquareWrapper i={i} key={i} tiles={tiles} onTileMoved={onTileMoved} />
-    );
+  for (let i = 0; i < 64 + 16 /* 80 */; i++) {
+    if (i === 77) {
+      squares.push(
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "12.5%",
+            height: "12.5%",
+          }}
+        >
+          <Icon
+            name="refresh"
+            className="button boardButton"
+            onClick={() => alert(true)}
+          />
+        </div>
+      );
+    } else if (i === 78) {
+      squares.push(
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "12.5%",
+            height: "12.5%",
+          }}
+        >
+          <Icon
+            name="delete"
+            className="button boardButton"
+            onClick={() => alert(true)}
+          />
+        </div>
+      );
+    } else if (i === 79) {
+      squares.push(
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "12.5%",
+            height: "12.5%",
+          }}
+        >
+          <Icon
+            name="check"
+            className="button boardButton"
+            onClick={() => alert(true)}
+          />
+        </div>
+      );
+    } else {
+      squares.push(
+        <SquareWrapper i={i} key={i} tiles={tiles} onTileMoved={onTileMoved} />
+      );
+    }
   }
 
   const backend = isMobile() ? TouchBackend : HTML5Backend;
