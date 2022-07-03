@@ -25,7 +25,7 @@ function Header() {
           className="button headerButton"
           onClick={() => setShowHelpModal(true)}
         />
-        <span className="headerText">lattice</span>
+        <span className="headerText">lattice #1</span>
         <Icon
           style={{
             cursor: "pointer",

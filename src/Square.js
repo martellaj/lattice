@@ -12,8 +12,6 @@ export default function Square({
   onTileMoved,
   hasTile,
 }) {
-  const fill = "#25273c";
-
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.TILE,
@@ -36,16 +34,16 @@ export default function Square({
     [x, y, hasTile]
   );
 
-  let backgroundColor = fill;
+  let backgroundColor = "#323434";
   if (isInDrawer(x, y)) {
     if (isOver) {
-      backgroundColor = "#969BC5";
+      backgroundColor = "#484A4A";
     } else {
-      backgroundColor = "#777a92";
+      backgroundColor = "#8F9999";
     }
   } else if (isOver) {
     if (!hasTile) {
-      backgroundColor = "#414566";
+      backgroundColor = "#323434";
     }
   }
 

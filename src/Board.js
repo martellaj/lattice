@@ -55,6 +55,7 @@ export default function Board({ tiles, onTileMoved, shuffle }) {
             justifyContent: "center",
             width: "12.5%",
             height: "12.5%",
+            padding: "2px",
           }}
         >
           <Icon
@@ -74,11 +75,12 @@ export default function Board({ tiles, onTileMoved, shuffle }) {
             justifyContent: "center",
             width: "12.5%",
             height: "12.5%",
+            padding: "2px",
           }}
         >
           <Icon
             name="delete"
-            className="button boardButton"
+            className="boardButton deleteButton"
             onClick={() => alert(true)}
           />
         </div>
@@ -93,11 +95,12 @@ export default function Board({ tiles, onTileMoved, shuffle }) {
             justifyContent: "center",
             width: "12.5%",
             height: "12.5%",
+            padding: "2px",
           }}
         >
           <Icon
             name="check"
-            className="button boardButton"
+            className="button boardButton checkButton"
             onClick={() => alert(true)}
           />
         </div>

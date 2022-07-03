@@ -1,6 +1,9 @@
-body {
-  background-color: #161722;
+* {
+  font-family: "Roboto Mono", monospace;
+}
 
+body {
+  background-color: #1a1a1b;
   margin: 0;
   font-family: "Spinnaker", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,7 +20,7 @@ body {
   max-width: 500px;
   text-align: center;
   height: var(--app-height);
-  background-color: #161722;
+  background-color: #1a1a1b;
 }
 
 .ui.modal {
@@ -26,16 +29,25 @@ body {
 
 .boardButton {
   align-items: center;
-  background-color: #cacde8 !important;
+  background-color: black !important;
   border-radius: 10% !important;
   color: #161722 !important;
   cursor: pointer;
   display: flex !important;
   font-size: xx-large !important;
-  height: 90% !important;
+  height: 100% !important;
   justify-content: center !important;
   letter-spacing: 0.2rem !important;
-  width: 90% !important;
+  width: 100% !important;
   margin: 0 !important;
-  box-shadow: inset #e4e5f1 2px 2px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  color: white !important;
+}
+
+.deleteButton {
+  background-color: #b11a1a !important;
+}
+
+.checkButton {
+  background-color: #3a8b38 !important;
 }
