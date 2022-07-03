@@ -142,7 +142,7 @@ function App() {
   };
 
   const resetBoard = () => {
-    updateTiles([...TILES]);
+    updateTiles(() => [...TILES]);
   };
 
   return (
