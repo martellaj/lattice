@@ -22,7 +22,7 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
       style={{
         width: "12.5%",
         height: "12.5%",
-        backgroundColor: i >= 64 ? "#777a92" : "unset",
+        // backgroundColor: i >= 64 ? "#777a92" : "unset",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
