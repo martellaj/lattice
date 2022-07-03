@@ -20,6 +20,7 @@ body {
   max-width: 500px;
   text-align: center;
   height: var(--app-height);
+  max-height: var(--app-height);
   background-color: #1a1a1b;
 }
 
