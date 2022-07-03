@@ -168,6 +168,10 @@ function App() {
       };
     }
 
+    // todo: check words against dictionary
+    const words = getWords(_tiles);
+    console.log(words);
+
     return {
       result: true,
     };
@@ -276,6 +280,50 @@ function shuffleArray(array) {
     array[j].x = x1;
     array[j].y = y1;
   }
+}
+
+function getLetter(x, y, tiles) {
+  return tiles.find((tile) => tile.x === x && tile.y === y)?.letter;
+}
+
+function getWords(tiles) {
+  const words = [];
+
+  // row words
+  for (let i = 0; i < 8; i++) {
+    let rowWord = "";
+
+    for (let j = 0; j < 8; j++) {
+      if (squareHasTile(j, i, tiles)) {
+        rowWord += getLetter(j, i, tiles);
+      } else {
+        words.push(rowWord);
+        rowWord = "";
+      }
+    }
+
+    words.push(rowWord);
+    rowWord = "";
+  }
+
+  // column words
+  for (let i = 0; i < 8; i++) {
+    let columnWord = "";
+
+    for (let j = 0; j < 8; j++) {
+      if (squareHasTile(i, j, tiles)) {
+        columnWord += getLetter(i, j, tiles);
+      } else {
+        words.push(columnWord);
+        columnWord = "";
+      }
+    }
+
+    words.push(columnWord);
+    columnWord = "";
+  }
+
+  return words.filter((word) => word.length > 1);
 }
 
 export default App;
