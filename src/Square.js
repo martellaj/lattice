@@ -1,13 +1,14 @@
 import React from "react";
 import { ItemTypes } from "./constants";
 import { useDrop } from "react-dnd";
+import isInDrawer from "./isInDrawer";
 
 export default function Square({
   black,
   children,
   x,
   y,
-  updateTilePosition,
+  onTileMoved,
   hasTile,
 }) {
   const fill = black ? "black" : "white";
@@ -17,7 +18,15 @@ export default function Square({
     () => ({
       accept: ItemTypes.TILE,
       drop: (item) =>
-        updateTilePosition("board", item.letter, x, y, item.prevX, item.prevY),
+        onTileMoved(
+          "board",
+          item.letter,
+          x,
+          y,
+          item.prevX,
+          item.prevY,
+          item.id
+        ),
       canDrop: () => !hasTile,
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
@@ -26,6 +35,21 @@ export default function Square({
     }),
     [x, y, hasTile]
   );
+
+  let backgroundColor = fill;
+  if (isInDrawer(x, y)) {
+    backgroundColor = "brown";
+  } else if (isOver) {
+    if (hasTile) {
+      backgroundColor = "red";
+    } else {
+      backgroundColor = "blue";
+    }
+  } else {
+    if (hasTile) {
+      backgroundColor = "green";
+    }
+  }
 
   return (
     <div
@@ -36,13 +60,7 @@ export default function Square({
         width: "100%",
         height: "100%",
         position: "relative",
-        backgroundColor: isOver
-          ? hasTile
-            ? "red"
-            : "blue"
-          : hasTile
-          ? "green"
-          : fill,
+        backgroundColor: backgroundColor,
       }}
     >
       {children}

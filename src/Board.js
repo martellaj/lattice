@@ -4,13 +4,13 @@ import Tile from "./Tile";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-function SquareWrapper({ i, tilePositions, updateTilePosition }) {
+function SquareWrapper({ i, tiles, onTileMoved }) {
   const x = i % 8;
   const y = Math.floor(i / 8);
-  const hasTile = squareHasTile(x, y, tilePositions);
+  const hasTile = squareHasTile(x, y, tiles);
   const black = (x + y) % 2 === 1;
   const tile = hasTile ? (
-    <Tile letter={getLetter(x, y, tilePositions)} x={x} y={y} />
+    <Tile letter={getLetter(x, y, tiles)} x={x} y={y} id={getId(x, y, tiles)} />
   ) : null;
 
   return (
@@ -19,7 +19,7 @@ function SquareWrapper({ i, tilePositions, updateTilePosition }) {
         black={black}
         x={x}
         y={y}
-        updateTilePosition={updateTilePosition}
+        onTileMoved={onTileMoved}
         hasTile={hasTile}
       >
         {tile}
@@ -28,16 +28,11 @@ function SquareWrapper({ i, tilePositions, updateTilePosition }) {
   );
 }
 
-export default function Board({ tilePositions, updateTilePosition }) {
+export default function Board({ tiles, onTileMoved }) {
   const squares = [];
-  for (let i = 0; i < 64; i++) {
+  for (let i = 0; i < 64 + 11; i++) {
     squares.push(
-      <SquareWrapper
-        i={i}
-        key={i}
-        tilePositions={tilePositions}
-        updateTilePosition={updateTilePosition}
-      />
+      <SquareWrapper i={i} key={i} tiles={tiles} onTileMoved={onTileMoved} />
     );
   }
 
@@ -58,10 +53,14 @@ export default function Board({ tilePositions, updateTilePosition }) {
   );
 }
 
-function squareHasTile(x, y, tilePositions) {
-  return tilePositions.some((tile) => tile.x === x && tile.y === y);
+function squareHasTile(x, y, tiles) {
+  return tiles.some((tile) => tile.x === x && tile.y === y);
 }
 
-function getLetter(x, y, tilePositions) {
-  return tilePositions.find((tile) => tile.x === x && tile.y === y)?.letter;
+function getLetter(x, y, tiles) {
+  return tiles.find((tile) => tile.x === x && tile.y === y)?.letter;
+}
+
+function getId(x, y, tiles) {
+  return tiles.find((tile) => tile.x === x && tile.y === y)?.id;
 }

@@ -18,39 +18,56 @@ const appHeight = () =>
 window.addEventListener("resize", appHeight);
 appHeight();
 
+const rows = 8;
+
 function App() {
-  const [tilePositions, setTilePositions] = useState([
-    { letter: "A", x: 0, y: 0 },
-    { letter: "B", x: 0, y: 1 },
+  const [tiles, updateTiles] = useState([
+    {
+      letter: "A",
+      id: guid(),
+      x: 64 % rows,
+      y: Math.floor(64 / rows),
+    },
   ]);
 
-  const onTileMoved = (dropTarget, letter, x, y, prevX, prevY) => {
+  const onTileMoved = (dropTarget, letter, x, y, prevX, prevY, id) => {
     if (dropTarget === "board") {
-      setTilePositions((_previousTilePositions) => {
+      updateTiles((_previousTilePositions) => {
         let previousTilePositions = [..._previousTilePositions];
 
-        console.log(JSON.stringify(previousTilePositions));
-        console.log(`${letter} moved from ${prevX}, ${prevY} to ${x}, ${y}`);
+        console.log(
+          `tile with id ${id} moved from (${prevX}, ${prevY}) to (${x}, ${y})`
+        );
 
         // remove tile that's changing position
         previousTilePositions = previousTilePositions.filter(
-          (tile) => !(tile.x === prevX && tile.y === prevY)
+          (tile) => tile.id !== id
         );
 
         // add tile back (with new position)
-        previousTilePositions.push({ letter: letter, x: x, y: y });
+        previousTilePositions.push({ letter: letter, x: x, y: y, id: id });
 
         // setter
         return [...previousTilePositions];
       });
+    } else if (dropTarget === "drawer") {
     }
   };
 
   return (
     <div className="App">
       <Header />
-      <Board tilePositions={tilePositions} updateTilePosition={onTileMoved} />
+      <Board tiles={tiles} onTileMoved={onTileMoved} />
     </div>
+  );
+}
+
+function guid() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
   );
 }
 
