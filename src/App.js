@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Board from "./Board";
 import Header from "./Header";

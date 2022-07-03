@@ -6,6 +6,38 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend";
 import isMobile from "./isMobile";
 import { Icon } from "semantic-ui-react";
+import { usePreview } from "react-dnd-preview";
+
+const MyPreview = () => {
+  const { display, item, style } = usePreview();
+  if (!display) {
+    return null;
+  }
+  return (
+    <div
+      style={{
+        fontSize: 25,
+        fontWeight: "bold",
+        cursor: "move",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height:
+          document.getElementsByClassName("tile")?.[0]?.offsetHeight * 1.2 ||
+          "60px",
+        width:
+          document.getElementsByClassName("tile")?.[0]?.offsetWidth * 1.2 ||
+          "60px",
+        opacity: 1,
+        ...style,
+        zIndex: 10000,
+      }}
+      className="tile"
+    >
+      {item.letter}
+    </div>
+  );
+};
 
 function SquareWrapper({ i, tiles, onTileMoved }) {
   const x = i % 8;
@@ -128,6 +160,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
       >
         {squares}
       </div>
+      <MyPreview />
     </DndProvider>
   );
 }

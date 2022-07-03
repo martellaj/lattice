@@ -1,9 +1,10 @@
 import React from "react";
 import { ItemTypes } from "./constants";
-import { useDrag } from "react-dnd";
+import { useDrag, DragPreviewImage } from "react-dnd";
+import { getEmptyImage } from "react-dnd-html5-backend";
 
 export default function Tile({ letter, x, y, id }) {
-  const [{ isDragging }, drag] = useDrag(
+  const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: ItemTypes.TILE,
       collect: (monitor) => ({
@@ -20,20 +21,23 @@ export default function Tile({ letter, x, y, id }) {
   );
 
   return (
-    <div
-      ref={drag}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: "bold",
-        cursor: "move",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      className="tile"
-    >
-      {letter}
-    </div>
+    <>
+      <DragPreviewImage connect={preview} src={getEmptyImage()} />
+      <div
+        ref={drag}
+        style={{
+          opacity: isDragging ? 0.5 : 1,
+          fontSize: 25,
+          fontWeight: "bold",
+          cursor: "move",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        className="tile"
+      >
+        {letter}
+      </div>
+    </>
   );
 }
