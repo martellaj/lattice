@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Board from "./Board";
 import Header from "./Header";
+import isInDrawer from "./isInDrawer";
 
 // interface TilePositionData = {
 //   letter: string;
@@ -103,10 +104,6 @@ function App() {
       updateTiles((_previousTilePositions) => {
         let previousTilePositions = [..._previousTilePositions];
 
-        console.log(
-          `tile with id ${id} moved from (${prevX}, ${prevY}) to (${x}, ${y})`
-        );
-
         // remove tile that's changing position
         previousTilePositions = previousTilePositions.filter(
           (tile) => tile.id !== id
@@ -145,6 +142,37 @@ function App() {
     updateTiles(() => [...TILES]);
   };
 
+  const showResult = () => {
+    const result = checkBoard();
+    console.log(result.result ? "yay" : result.reason);
+  };
+
+  const checkBoard = () => {
+    const _tiles = [...tiles];
+
+    // fail when there are tiles in drawer
+    for (const tile of tiles) {
+      if (isInDrawer(tile.x, tile.y)) {
+        return {
+          result: false,
+          reason: "tiles_left_in_drawer",
+        };
+      }
+    }
+
+    // ensure board is valid (all tiles connected)
+    if (!isConnected(_tiles)) {
+      return {
+        result: false,
+        reason: "invalid_board",
+      };
+    }
+
+    return {
+      result: true,
+    };
+  };
+
   return (
     <div className="App">
       <Header />
@@ -153,9 +181,74 @@ function App() {
         onTileMoved={onTileMoved}
         shuffle={shuffleBoard}
         reset={resetBoard}
+        check={showResult}
       />
     </div>
   );
+}
+
+function isConnected(tiles) {
+  countTiles(tiles[tiles.length - 1], tiles);
+  const _isConnected = tileCount === 12;
+
+  // reset visited state
+  for (const tile of tiles) {
+    tile.visited = false;
+  }
+
+  // reset count
+  tileCount = 0;
+
+  return _isConnected;
+}
+
+let tileCount = 0;
+function countTiles(tile, tiles) {
+  const { x, y } = tile;
+
+  // count the tile if it's not been visited yet
+  if (!getVisited(x, y, tiles)) {
+    tileCount++;
+    markVisited(x, y, tiles);
+  }
+
+  if (squareHasTile(x + 1, y, tiles) && !getVisited(x + 1, y, tiles)) {
+    countTiles(getTile(x + 1, y, tiles), tiles);
+  }
+
+  if (squareHasTile(x - 1, y, tiles) && !getVisited(x - 1, y, tiles)) {
+    countTiles(getTile(x - 1, y, tiles), tiles);
+  }
+
+  if (squareHasTile(x, y + 1, tiles) && !getVisited(x, y + 1, tiles)) {
+    countTiles(getTile(x, y + 1, tiles), tiles);
+  }
+
+  if (squareHasTile(x, y - 1, tiles) && !getVisited(x, y - 1, tiles)) {
+    countTiles(getTile(x, y - 1, tiles), tiles);
+  }
+}
+
+function squareHasTile(x, y, tiles) {
+  if (x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+    return tiles.some((tile) => tile.x === x && tile.y === y);
+  } else {
+    return false;
+  }
+}
+
+function getVisited(x, y, tiles) {
+  return tiles.find((tile) => tile.x === x && tile.y === y)?.visited;
+}
+
+function markVisited(x, y, tiles) {
+  const tile = tiles.find((tile) => tile.x === x && tile.y === y);
+  tile.visited = true;
+}
+
+function getTile(x, y, tiles) {
+  const tile = tiles.find((tile) => tile.x === x && tile.y === y);
+  return tile;
 }
 
 function guid() {

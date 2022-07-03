@@ -74,7 +74,7 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
   );
 }
 
-export default function Board({ tiles, onTileMoved, shuffle, reset }) {
+export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
   const squares = [];
   for (let i = 0; i < 64 + 16 /* 80 */; i++) {
     if (i === 77) {
@@ -133,7 +133,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
           <Icon
             name="check"
             className="button boardButton checkButton"
-            onClick={() => alert(true)}
+            onClick={() => check()}
           />
         </div>
       );
