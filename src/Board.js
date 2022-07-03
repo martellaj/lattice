@@ -42,12 +42,13 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
   );
 }
 
-export default function Board({ tiles, onTileMoved }) {
+export default function Board({ tiles, onTileMoved, shuffle }) {
   const squares = [];
   for (let i = 0; i < 64 + 16 /* 80 */; i++) {
     if (i === 77) {
       squares.push(
         <div
+          key={i}
           style={{
             display: "flex",
             alignItems: "center",
@@ -59,13 +60,14 @@ export default function Board({ tiles, onTileMoved }) {
           <Icon
             name="refresh"
             className="button boardButton"
-            onClick={() => alert(true)}
+            onClick={() => shuffle()}
           />
         </div>
       );
     } else if (i === 78) {
       squares.push(
         <div
+          key={i}
           style={{
             display: "flex",
             alignItems: "center",
@@ -84,6 +86,7 @@ export default function Board({ tiles, onTileMoved }) {
     } else if (i === 79) {
       squares.push(
         <div
+          key={i}
           style={{
             display: "flex",
             alignItems: "center",

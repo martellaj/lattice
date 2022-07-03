@@ -122,10 +122,29 @@ function App() {
     }
   };
 
+  const shuffleBoard = () => {
+    updateTiles((_previousTiles) => {
+      let previousTiles = [..._previousTiles];
+
+      const boardTiles = previousTiles.filter(
+        (tile) => tile.x < 8 && tile.y < 8
+      );
+      const drawerTiles = previousTiles.filter(
+        (tile) => tile.x >= 8 || tile.y >= 8
+      );
+
+      // shuffle the tiles
+      shuffleArray(drawerTiles);
+
+      // setter
+      return [...boardTiles, ...drawerTiles];
+    });
+  };
+
   return (
     <div className="App">
       <Header />
-      <Board tiles={tiles} onTileMoved={onTileMoved} />
+      <Board tiles={tiles} onTileMoved={onTileMoved} shuffle={shuffleBoard} />
     </div>
   );
 }
@@ -137,6 +156,24 @@ function guid() {
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16)
   );
+}
+
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+
+    const x1 = array[i].x;
+    const y1 = array[i].y;
+
+    const x2 = array[j].x;
+    const y2 = array[j].y;
+
+    array[i].x = x2;
+    array[i].y = y2;
+
+    array[j].x = x1;
+    array[j].y = y1;
+  }
 }
 
 export default App;
