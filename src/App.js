@@ -141,10 +141,19 @@ function App() {
     });
   };
 
+  const resetBoard = () => {
+    updateTiles([...TILES]);
+  };
+
   return (
     <div className="App">
       <Header />
-      <Board tiles={tiles} onTileMoved={onTileMoved} shuffle={shuffleBoard} />
+      <Board
+        tiles={tiles}
+        onTileMoved={onTileMoved}
+        shuffle={shuffleBoard}
+        reset={resetBoard}
+      />
     </div>
   );
 }
