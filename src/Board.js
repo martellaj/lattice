@@ -21,7 +21,7 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
       key={i}
       style={{
         width: "12.5%",
-        height: "12.5%",
+        height: "10%",
         // backgroundColor: i >= 64 ? "#777a92" : "unset",
         display: "flex",
         justifyContent: "center",
@@ -54,7 +54,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
             alignItems: "center",
             justifyContent: "center",
             width: "12.5%",
-            height: "12.5%",
+            height: "10%",
             padding: "2px",
           }}
         >
@@ -74,7 +74,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
             alignItems: "center",
             justifyContent: "center",
             width: "12.5%",
-            height: "12.5%",
+            height: "10%",
             padding: "2px",
           }}
         >
@@ -94,7 +94,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
             alignItems: "center",
             justifyContent: "center",
             width: "12.5%",
-            height: "12.5%",
+            height: "10%",
             padding: "2px",
           }}
         >
@@ -119,11 +119,12 @@ export default function Board({ tiles, onTileMoved, shuffle, reset }) {
       <div
         style={{
           width: "100%",
-          height: "100%",
           display: "flex",
           flexWrap: "wrap",
-          maxHeight: "500px",
+          maxHeight: "700px",
+          flexGrow: 1,
         }}
+        className="board"
       >
         {squares}
       </div>

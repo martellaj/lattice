@@ -7,6 +7,7 @@
   justify-content: space-between;
   width: 100%;
   padding: 6px 0;
+  height: 50px !important;
 }
 
 .headerText {
@@ -21,11 +22,11 @@
   color: #161722 !important;
   cursor: pointer;
   display: flex !important;
-  font-size: xx-large !important;
-  height: 48px !important;
+  font-size: x-large !important;
+  height: 38px !important;
   justify-content: center !important;
   letter-spacing: 0.2rem !important;
-  width: 48px !important;
+  width: 38px !important;
   margin: 0 !important;
   margin-left: 6px !important;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
