@@ -4,18 +4,24 @@ import Tile from "./Tile";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-function renderSquare(i, tilePositions, updateTilePosition) {
+function SquareWrapper({ i, tilePositions, updateTilePosition }) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   const hasTile = squareHasTile(x, y, tilePositions);
   const black = (x + y) % 2 === 1;
   const tile = hasTile ? (
-    <Tile letter={getLetter(x, y, tilePositions)} />
+    <Tile letter={getLetter(x, y, tilePositions)} x={x} y={y} />
   ) : null;
 
   return (
     <div key={i} style={{ width: "12.5%", height: "12.5%" }}>
-      <Square black={black} x={x} y={y} updateTilePosition={updateTilePosition}>
+      <Square
+        black={black}
+        x={x}
+        y={y}
+        updateTilePosition={updateTilePosition}
+        hasTile={hasTile}
+      >
         {tile}
       </Square>
     </div>
@@ -25,7 +31,14 @@ function renderSquare(i, tilePositions, updateTilePosition) {
 export default function Board({ tilePositions, updateTilePosition }) {
   const squares = [];
   for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i, tilePositions, updateTilePosition));
+    squares.push(
+      <SquareWrapper
+        i={i}
+        key={i}
+        tilePositions={tilePositions}
+        updateTilePosition={updateTilePosition}
+      />
+    );
   }
 
   return (

@@ -24,12 +24,17 @@ function App() {
     { letter: "B", x: 0, y: 1 },
   ]);
 
-  const onTileMoved = (dropTarget, letter, x, y) => {
+  const onTileMoved = (dropTarget, letter, x, y, prevX, prevY) => {
     if (dropTarget === "board") {
-      setTilePositions((previousTilePositions) => {
+      setTilePositions((_previousTilePositions) => {
+        let previousTilePositions = [..._previousTilePositions];
+
+        console.log(JSON.stringify(previousTilePositions));
+        console.log(`${letter} moved from ${prevX}, ${prevY} to ${x}, ${y}`);
+
         // remove tile that's changing position
         previousTilePositions = previousTilePositions.filter(
-          (tile) => tile.letter != letter
+          (tile) => !(tile.x === prevX && tile.y === prevY)
         );
 
         // add tile back (with new position)

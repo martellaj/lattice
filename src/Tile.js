@@ -2,7 +2,7 @@ import React from "react";
 import { ItemTypes } from "./constants";
 import { useDrag } from "react-dnd";
 
-export default function Tile({ letter }) {
+export default function Tile({ letter, x, y }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.TILE,
     collect: (monitor) => ({
@@ -10,6 +10,8 @@ export default function Tile({ letter }) {
     }),
     item: {
       letter,
+      prevX: x,
+      prevY: y,
     },
   }));
 
