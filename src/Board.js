@@ -16,7 +16,18 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
   ) : null;
 
   return (
-    <div key={i} style={{ width: "12.5%", height: "12.5%" }}>
+    <div
+      key={i}
+      style={{
+        width: "12.5%",
+        height: "12.5%",
+        backgroundColor: i >= 64 ? "#777a92" : "unset",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "2px",
+      }}
+    >
       <Square
         black={black}
         x={x}
@@ -32,7 +43,7 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
 
 export default function Board({ tiles, onTileMoved }) {
   const squares = [];
-  for (let i = 0; i < 64 + 11; i++) {
+  for (let i = 0; i < 64 + 16; i++) {
     squares.push(
       <SquareWrapper i={i} key={i} tiles={tiles} onTileMoved={onTileMoved} />
     );

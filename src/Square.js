@@ -2,6 +2,7 @@ import React from "react";
 import { ItemTypes } from "./constants";
 import { useDrop } from "react-dnd";
 import isInDrawer from "./isInDrawer";
+import "./Square.css";
 
 export default function Square({
   black,
@@ -11,8 +12,7 @@ export default function Square({
   onTileMoved,
   hasTile,
 }) {
-  const fill = black ? "black" : "white";
-  const stroke = black ? "white" : "black";
+  const fill = "#25273c";
 
   const [{ isOver }, drop] = useDrop(
     () => ({
@@ -38,16 +38,14 @@ export default function Square({
 
   let backgroundColor = fill;
   if (isInDrawer(x, y)) {
-    backgroundColor = "brown";
-  } else if (isOver) {
-    if (hasTile) {
-      backgroundColor = "red";
+    if (isOver) {
+      backgroundColor = "#969BC5";
     } else {
-      backgroundColor = "blue";
+      backgroundColor = "#777a92";
     }
-  } else {
-    if (hasTile) {
-      backgroundColor = "green";
+  } else if (isOver) {
+    if (!hasTile) {
+      backgroundColor = "#414566";
     }
   }
 
@@ -55,13 +53,10 @@ export default function Square({
     <div
       ref={drop}
       style={{
-        backgroundColor: fill,
-        color: stroke,
-        width: "100%",
-        height: "100%",
-        position: "relative",
         backgroundColor: backgroundColor,
+        boxShadow: isInDrawer(x, y) ? "unset" : "#e4e5f1 grey 2px 2px",
       }}
+      className="square"
     >
       {children}
     </div>

@@ -1,5 +1,5 @@
 body {
-  background-color: #edeff1;
+  background-color: #25273c;
 
   margin: 0;
   font-family: "Spinnaker", sans-serif;
@@ -17,7 +17,7 @@ body {
   max-width: 500px;
   text-align: center;
   height: var(--app-height);
-  background-color: #fbfbfb;
+  background-color: #161722;
 }
 
 .ui.modal {

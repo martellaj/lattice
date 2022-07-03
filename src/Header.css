@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #038eca;
+  color: #cacde8;
 
   justify-content: space-between;
   width: 100%;
@@ -12,12 +12,12 @@
 
 .headerText {
   font-variant: all-small-caps;
-  font-size: 4vh;
+  font-size: xx-large;
 }
 
 .headerButton {
-  background-color: #038eca !important;
-  color: white !important;
+  background-color: #cacde8 !important;
+  color: #161722 !important;
   height: 35px !important;
   width: 35px !important;
   border-radius: 10% !important;

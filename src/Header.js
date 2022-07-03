@@ -25,7 +25,7 @@ function Header() {
           className="button headerButton"
           onClick={() => setShowHelpModal(true)}
         />
-        <span className="headerText">BATTLESHIPPLE</span>
+        <span className="headerText">funscramble</span>
         <Icon
           style={{
             cursor: "pointer",

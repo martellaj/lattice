@@ -24,7 +24,11 @@ export default function Tile({ letter, x, y, id }) {
         fontSize: 25,
         fontWeight: "bold",
         cursor: "move",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
+      className="tile"
     >
       {letter}
     </div>
