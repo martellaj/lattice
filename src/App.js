@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import Board from "./Board";
+import CheckModal from "./CheckModal";
 import Header from "./Header";
 import isInDrawer from "./isInDrawer";
 import DICTIONARY from "./sowpods";
@@ -100,6 +101,10 @@ const TILES = [
 function App() {
   const [tiles, updateTiles] = useState(TILES);
 
+  const [showCheckModal, setShowCheckModal] = useState(false);
+
+  const [gameResult, setGameResult] = useState({});
+
   const onTileMoved = (dropTarget, letter, x, y, prevX, prevY, id) => {
     if (dropTarget === "board") {
       updateTiles((_previousTilePositions) => {
@@ -145,6 +150,11 @@ function App() {
 
   const showResult = () => {
     const result = checkBoard();
+
+    setGameResult({ ...result });
+
+    setShowCheckModal(true);
+
     console.log(result.result ? "yay" : result.reason);
   };
 
@@ -156,7 +166,7 @@ function App() {
       if (isInDrawer(tile.x, tile.y)) {
         return {
           result: false,
-          reason: "tiles_left_in_drawer",
+          reason: "Make sure you use all 12 tiles in your lattice!",
         };
       }
     }
@@ -165,7 +175,7 @@ function App() {
     if (!isConnected(_tiles)) {
       return {
         result: false,
-        reason: "invalid_board",
+        reason: "Make sure all your words are properly crossing!",
       };
     }
 
@@ -176,7 +186,7 @@ function App() {
     if (invalidWords.length > 0) {
       return {
         result: false,
-        reason: "invalid_words",
+        reason: "Make sure all your words are at least 3 letters!",
         invalidWords: invalidWords,
       };
     }
@@ -197,8 +207,10 @@ function App() {
     if (!areAllWordsValid) {
       return {
         result: false,
-        reason: "invalid_words",
-        wordResults,
+        reason: "We didn't find these words in our word list:",
+        invalidWords: wordResults
+          .filter((wordResult) => !wordResult.isValid)
+          .map((wordResult) => wordResult.word),
       };
     }
 
@@ -218,6 +230,9 @@ function App() {
         reset={resetBoard}
         check={showResult}
       />
+      {showCheckModal && (
+        <CheckModal onClosed={() => setShowCheckModal(false)} {...gameResult} />
+      )}
     </div>
   );
 }

@@ -53,6 +53,12 @@ body {
   background-color: #3a8b38 !important;
 }
 
+.checkButtonCheckModal {
+  width: 50px !important;
+  height: 40px !important;
+  margin-top: 12px !important;
+}
+
 .refreshButton {
   background-color: #b59626 !important;
 }
