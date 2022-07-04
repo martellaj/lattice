@@ -19,7 +19,7 @@ function CheckModal({ onClosed, result, reason, invalidWords }) {
       size="small"
     >
       <div className="helpModalTitle">
-        {result ? "great job! 🎉" : "not quite right... 🤔"}
+        {result ? "great work!" : "not quite right..."}
       </div>
       {reason && (
         <div
