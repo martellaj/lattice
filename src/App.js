@@ -3,6 +3,7 @@ import "./App.css";
 import Board from "./Board";
 import Header from "./Header";
 import isInDrawer from "./isInDrawer";
+import DICTIONARY from "./sowpods";
 
 // interface TilePositionData = {
 //   letter: string;
@@ -170,10 +171,28 @@ function App() {
 
     // todo: check words against dictionary
     const words = getWords(_tiles);
-    console.log(words);
+    let wordResults = [];
+    for (const word of words) {
+      wordResults.push({
+        word: word,
+        isValid: DICTIONARY.includes(word),
+      });
+    }
+
+    const areAllWordsValid = wordResults.every(
+      (wordResult) => wordResult.isValid
+    );
+    if (!areAllWordsValid) {
+      return {
+        result: false,
+        reason: "invalid_words",
+        wordResults,
+      };
+    }
 
     return {
       result: true,
+      wordResults,
     };
   };
 
