@@ -21,3 +21,7 @@
   color: white !important;
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
+
+.vowel {
+  background: #4b398b !important;
+}

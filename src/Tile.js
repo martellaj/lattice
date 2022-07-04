@@ -34,7 +34,11 @@ export default function Tile({ letter, x, y, id }) {
           justifyContent: "center",
           alignItems: "center",
         }}
-        className="tile"
+        className={`tile ${
+          ["a", "e", "i", "o", "u"].includes(letter.toLowerCase())
+            ? "vowel"
+            : ""
+        }`}
       >
         {letter}
       </div>

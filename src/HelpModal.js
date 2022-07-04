@@ -19,11 +19,31 @@ function HelpModal(props) {
       size="small"
     >
       <div className="helpModalTitle">HOW TO PLAY</div>
-      <div>💣 Select a spot to fire a shot</div>
-      <div>❌ means you missed</div>
-      <div>💥 means you hit the battleship</div>
-      <div>🏆 Sink the battleship (3 hits) in as few shots as possible</div>
-      <div>🕛 New battle at midnight</div>
+      <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "24px",
+        }}
+      >
+        <strong>Lattice</strong> is where Scrabble meets Solitaire
+      </div>
+      <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "24px",
+        }}
+      >
+        Use all <strong>12 tiles</strong> to make words that cross
+      </div>
+      <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "24px",
+        }}
+      >
+        Words must be at least <strong>3 letters</strong> long
+      </div>
+      <div>New Lattice at midnight</div>
     </Modal>
   );
 }

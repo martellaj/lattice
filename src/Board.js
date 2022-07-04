@@ -32,7 +32,11 @@ const MyPreview = () => {
         ...style,
         zIndex: 10000,
       }}
-      className="tile"
+      className={`tile ${
+        ["a", "e", "i", "o", "u"].includes(item.letter.toLowerCase())
+          ? "vowel"
+          : ""
+      }`}
     >
       {item.letter}
     </div>
@@ -92,7 +96,7 @@ export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
         >
           <Icon
             name="refresh"
-            className="button boardButton"
+            className="button boardButton refreshButton"
             onClick={() => shuffle()}
           />
         </div>

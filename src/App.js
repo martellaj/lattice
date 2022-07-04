@@ -169,8 +169,19 @@ function App() {
       };
     }
 
-    // todo: check words against dictionary
     const words = getWords(_tiles);
+
+    // ensure all words are at least 3 letters
+    const invalidWords = words.filter((word) => word.length < 3);
+    if (invalidWords.length > 0) {
+      return {
+        result: false,
+        reason: "invalid_words",
+        invalidWords: invalidWords,
+      };
+    }
+
+    // check all words against the dictionary
     let wordResults = [];
     for (const word of words) {
       wordResults.push({
@@ -179,6 +190,7 @@ function App() {
       });
     }
 
+    // ensure all words are valid
     const areAllWordsValid = wordResults.every(
       (wordResult) => wordResult.isValid
     );
