@@ -122,6 +122,16 @@ function App() {
   const checkBoard = () => {
     const _tiles = [...tiles];
 
+    // fail when there are tiles in drawer
+    for (const tile of _tiles) {
+      if (isInDrawer(tile.x, tile.y)) {
+        return {
+          result: false,
+          reason: "Make sure you use all 12 tiles in your lattice!",
+        };
+      }
+    }
+
     // ensure board is valid (all tiles connected)
     if (!isConnected(_tiles)) {
       return {
@@ -163,16 +173,6 @@ function App() {
           .filter((wordResult) => !wordResult.isValid)
           .map((wordResult) => wordResult.word),
       };
-    }
-
-    // fail when there are tiles in drawer
-    for (const tile of tiles) {
-      if (isInDrawer(tile.x, tile.y)) {
-        return {
-          result: false,
-          reason: "Make sure you use all 12 tiles in your lattice!",
-        };
-      }
     }
 
     window.localStorage.setItem(`puzzle-${getPuzzleNumber()}`, "true");
