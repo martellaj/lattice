@@ -15,9 +15,5 @@ export default function isMobile() {
     return check;
   };
 
-  return window.mobileCheck() && !isiPad();
-}
-
-function isiPad() {
-  return navigator.userAgent.match(/iPad/i) != null;
+  return window.mobileCheck();
 }
