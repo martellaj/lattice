@@ -33,7 +33,7 @@ const appHeight = () =>
 window.addEventListener("resize", appHeight);
 appHeight();
 
-const TILES_OVERRIDE = false;
+const TILES_OVERRIDE = true;
 
 function App() {
   const [tiles, updateTiles] = useState(
@@ -153,6 +153,8 @@ function App() {
       };
     }
 
+    window.localStorage.setItem(`puzzle-${getPuzzleNumber()}`, "true");
+
     return {
       result: true,
       wordResults,
@@ -170,7 +172,11 @@ function App() {
         check={showResult}
       />
       {showCheckModal && (
-        <CheckModal onClosed={() => setShowCheckModal(false)} {...gameResult} />
+        <CheckModal
+          onClosed={() => setShowCheckModal(false)}
+          {...gameResult}
+          tiles={tiles}
+        />
       )}
     </div>
   );

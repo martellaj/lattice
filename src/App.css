@@ -66,3 +66,45 @@ body {
 .refreshButton {
   background-color: #b59626 !important;
 }
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.statsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.statsColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.shareColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareButton {
+  background-color: #3a8b38 !important;
+  color: white !important;
+}
