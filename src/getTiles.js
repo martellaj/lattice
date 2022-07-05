@@ -89,9 +89,14 @@ const WINNING_TILES = [
   },
 ];
 
-export default function getTiles(puzzleNumber, override) {
+export default function getTiles(puzzleNumber, override, skipCache = false) {
   if (override) {
     return WINNING_TILES;
+  }
+
+  const cachedTiles = window.localStorage.getItem(`tiles-${puzzleNumber}`);
+  if (!skipCache && cachedTiles) {
+    return JSON.parse(cachedTiles);
   }
 
   const tiles = [];

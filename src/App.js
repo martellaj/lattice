@@ -59,6 +59,12 @@ function App() {
         // add tile back (with new position)
         previousTilePositions.push({ letter: letter, x: x, y: y, id: id });
 
+        // persist
+        window.localStorage.setItem(
+          `tiles-${getPuzzleNumber()}`,
+          JSON.stringify(previousTilePositions)
+        );
+
         // setter
         return [...previousTilePositions];
       });
@@ -80,13 +86,29 @@ function App() {
       // shuffle the tiles
       shuffleArray(drawerTiles);
 
+      window.localStorage.setItem(
+        `tiles-${getPuzzleNumber()}`,
+        JSON.stringify([...boardTiles, ...drawerTiles])
+      );
+
       // setter
       return [...boardTiles, ...drawerTiles];
     });
   };
 
   const resetBoard = () => {
-    updateTiles(() => [...getTiles(getPuzzleNumber(), TILES_OVERRIDE)]);
+    const defaultTiles = getTiles(
+      getPuzzleNumber(),
+      TILES_OVERRIDE,
+      true /* skipCache */
+    );
+
+    window.localStorage.setItem(
+      `tiles-${getPuzzleNumber()}`,
+      JSON.stringify(defaultTiles)
+    );
+
+    updateTiles(() => [...defaultTiles]);
   };
 
   const showResult = () => {
@@ -95,8 +117,6 @@ function App() {
     setGameResult({ ...result });
 
     setShowCheckModal(true);
-
-    console.log(result.result ? "yay" : result.reason);
   };
 
   const checkBoard = () => {
