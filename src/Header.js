@@ -2,6 +2,7 @@ import "./Header.css";
 import { Icon } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import HelpModal from "./HelpModal";
+import getPuzzleNumber from "./getPuzzleNumber";
 
 const seenHelp = window.localStorage.getItem("seenHelp2");
 
@@ -25,7 +26,7 @@ function Header() {
           className="button headerButton"
           onClick={() => setShowHelpModal(true)}
         />
-        <span className="headerText">lattice #1</span>
+        <span className="headerText">lattice #{getPuzzleNumber()}</span>
         <Icon
           style={{
             cursor: "pointer",
