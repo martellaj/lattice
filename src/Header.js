@@ -33,7 +33,9 @@ function Header() {
           }}
           name="at"
           className="button headerButton rightHeaderButton"
-          onClick={() => window.open("mailto:playcladder@gmail.com", "_blank")}
+          onClick={() =>
+            window.open("mailto:lattice.feedback@gmail.com", "_blank")
+          }
         />
       </div>
       {showHelpModal && <HelpModal onClosed={() => setShowHelpModal(false)} />}
