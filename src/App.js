@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Board from "./Board";
 import CheckModal from "./CheckModal";

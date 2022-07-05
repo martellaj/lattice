@@ -2,9 +2,11 @@ import "./HelpModal.css";
 import { Modal, Icon, Button } from "semantic-ui-react";
 import { useState } from "react";
 import getPuzzleNumber from "./getPuzzleNumber";
+import copy from "copy-to-clipboard";
 
 function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
   const [open, setOpen] = useState(true);
+  const [showCheck, setShowCheck] = useState(false);
 
   const { wins, currentStreak, bestStreak } = getStats();
 
@@ -92,8 +94,45 @@ function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
 
           <pre className="foo">{getShareBoard(tiles)}</pre>
 
-          <Button size="big" className="shareButton">
-            share
+          <Button
+            size="big"
+            className="shareButton"
+            onClick={() => {
+              let text = `#Lattice ${getPuzzleNumber()}\n\n${getShareBoard(
+                tiles
+              )}\nhttps://playlattice.com`;
+
+              var ua = navigator.userAgent.toLowerCase();
+              var isAndroid = ua.indexOf("android") > -1;
+
+              const isIos =
+                [
+                  "iPad Simulator",
+                  "iPhone Simulator",
+                  "iPod Simulator",
+                  "iPad",
+                  "iPhone",
+                  "iPod",
+                ].includes(navigator.platform) ||
+                // iPad on iOS 13 detection
+                (navigator.userAgent.includes("Mac") &&
+                  "ontouchend" in document);
+
+              if (isIos || isAndroid) {
+                navigator.share({
+                  text: text,
+                });
+              } else {
+                copy(text);
+
+                setShowCheck(true);
+                setTimeout(() => {
+                  setShowCheck(false);
+                }, 2000);
+              }
+            }}
+          >
+            {showCheck ? "copied!" : "share"}
           </Button>
         </div>
       )}
