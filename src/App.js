@@ -163,10 +163,17 @@ function App() {
     };
   };
 
-  const onTileTouched = () => setShowIpadModal(true);
+  const hasSeenIpadModal =
+    window.localStorage.getItem("hasSeenIpadModal") === "true";
+  const isiPad = navigator.userAgent.match(/iPad/i) != null;
+  const onTileTouched = () => {
+    if (!hasSeenIpadModal && isiPad) {
+      setShowIpadModal(true);
+    }
+  };
 
   return (
-    <div className="App" onClick={() => setShowIpadModal(true)}>
+    <div className="App">
       <Header />
       <Board
         tiles={tiles}
@@ -183,7 +190,9 @@ function App() {
           tiles={tiles}
         />
       )}
-      {showIpadModal && <IpadModal onClosed={() => setShowIpadModal(false)} />}
+      {showIpadModal && !hasSeenIpadModal && (
+        <IpadModal onClosed={() => setShowIpadModal(false)} />
+      )}
     </div>
   );
 }
