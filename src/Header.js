@@ -32,10 +32,10 @@ function Header() {
             cursor: "pointer",
             marginRight: "6px",
             marginLeft: "12px",
-            visibility: "hidden",
           }}
-          name="help"
+          name="at"
           className="button headerButton"
+          onClick={() => window.open("mailto:playcladder@gmail.com", "_blank")}
         />
       </div>
       {showHelpModal && <HelpModal onClosed={() => setShowHelpModal(false)} />}
