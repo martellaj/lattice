@@ -7,6 +7,7 @@ import { TouchBackend } from "react-dnd-touch-backend";
 import isMobile from "./isMobile";
 import { Icon } from "semantic-ui-react";
 import { usePreview } from "react-dnd-preview";
+import isInDrawer from "./isInDrawer";
 
 const MyPreview = () => {
   const { display, item, style } = usePreview();
@@ -136,7 +137,9 @@ export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
         >
           <Icon
             name="check"
-            className="button boardButton checkButton"
+            className={`button boardButton checkButton ${
+              !isAnyTilesInDrawer(tiles) && "ready"
+            }`}
             onClick={() => check()}
           />
         </div>
@@ -167,6 +170,10 @@ export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
       <MyPreview />
     </DndProvider>
   );
+}
+
+function isAnyTilesInDrawer(tiles) {
+  return tiles.some((tile) => isInDrawer(tile.x, tile.y));
 }
 
 function squareHasTile(x, y, tiles) {

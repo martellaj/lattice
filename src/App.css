@@ -50,6 +50,10 @@ body {
 }
 
 .checkButton {
+  background-color: #2b2b2e !important;
+}
+
+.checkButton.ready {
   background-color: #3a8b38 !important;
 }
 
