@@ -92,7 +92,9 @@ function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
             </div>
           </div>
 
-          <pre className="foo">{getShareBoard(tiles)}</pre>
+          <pre className="foo" style={{ overflow: "hidden" }}>
+            {getShareBoard(tiles)}
+          </pre>
 
           <Button
             size="big"
