@@ -1,6 +1,15 @@
 const ROWS_COUNT = 8;
 
-const bank = ["RFHTBMLHTEOI", "RFHTBMLHTEOI"];
+const bank = [
+  /*269,0*/ "RFHTBMLHTEOI",
+  /*269,1*/ "RFHTBMLHTEOI",
+  /*179,2*/ "NPIBODFBWGMA",
+  /*246,3*/ "LKSBRTNRTOOY",
+  /*211,4*/ "HMNPOGTACJZL",
+  /*203,5*/ "DNOWGBTKSNMU",
+  /*171,6*/ "ETDUONBRTYBG",
+  /*167,7*/ "ALPSILRBGETS",
+];
 
 const WINNING_TILES = [
   {

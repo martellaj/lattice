@@ -35,14 +35,6 @@ function HelpModal(props) {
       >
         Use all <strong>12 tiles</strong> to make words that cross
       </div>
-      <div
-        style={{
-          borderBottom: "1px solid #6c6c6c",
-          paddingBottom: "24px",
-        }}
-      >
-        Words must be at least <strong>3 letters</strong> long
-      </div>
       <div>New Lattice at midnight</div>
     </Modal>
   );

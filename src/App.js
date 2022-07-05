@@ -122,16 +122,6 @@ function App() {
   const checkBoard = () => {
     const _tiles = [...tiles];
 
-    // fail when there are tiles in drawer
-    for (const tile of tiles) {
-      if (isInDrawer(tile.x, tile.y)) {
-        return {
-          result: false,
-          reason: "Make sure you use all 12 tiles in your lattice!",
-        };
-      }
-    }
-
     // ensure board is valid (all tiles connected)
     if (!isConnected(_tiles)) {
       return {
@@ -143,14 +133,14 @@ function App() {
     const words = getWords(_tiles);
 
     // ensure all words are at least 3 letters
-    const invalidWords = words.filter((word) => word.length < 3);
-    if (invalidWords.length > 0) {
-      return {
-        result: false,
-        reason: "Make sure all your words are at least 3 letters!",
-        invalidWords: invalidWords,
-      };
-    }
+    // const invalidWords = words.filter((word) => word.length < 2);
+    // if (invalidWords.length > 0) {
+    //   return {
+    //     result: false,
+    //     reason: "Make sure all your words are at least 2 letters!",
+    //     invalidWords: invalidWords,
+    //   };
+    // }
 
     // check all words against the dictionary
     let wordResults = [];
@@ -173,6 +163,16 @@ function App() {
           .filter((wordResult) => !wordResult.isValid)
           .map((wordResult) => wordResult.word),
       };
+    }
+
+    // fail when there are tiles in drawer
+    for (const tile of tiles) {
+      if (isInDrawer(tile.x, tile.y)) {
+        return {
+          result: false,
+          reason: "Make sure you use all 12 tiles in your lattice!",
+        };
+      }
     }
 
     window.localStorage.setItem(`puzzle-${getPuzzleNumber()}`, "true");
