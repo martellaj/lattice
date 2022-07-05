@@ -33,7 +33,7 @@ const appHeight = () =>
 window.addEventListener("resize", appHeight);
 appHeight();
 
-const TILES_OVERRIDE = true;
+const TILES_OVERRIDE = false;
 
 function App() {
   const [tiles, updateTiles] = useState(
