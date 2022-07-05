@@ -44,13 +44,19 @@ const MyPreview = () => {
   );
 };
 
-function SquareWrapper({ i, tiles, onTileMoved }) {
+function SquareWrapper({ i, tiles, onTileMoved, onTileTouched }) {
   const x = i % 8;
   const y = Math.floor(i / 8);
   const hasTile = squareHasTile(x, y, tiles);
   const black = (x + y) % 2 === 1;
   const tile = hasTile ? (
-    <Tile letter={getLetter(x, y, tiles)} x={x} y={y} id={getId(x, y, tiles)} />
+    <Tile
+      letter={getLetter(x, y, tiles)}
+      x={x}
+      y={y}
+      id={getId(x, y, tiles)}
+      onTileTouched={onTileTouched}
+    />
   ) : null;
 
   return (
@@ -79,7 +85,14 @@ function SquareWrapper({ i, tiles, onTileMoved }) {
   );
 }
 
-export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
+export default function Board({
+  tiles,
+  onTileMoved,
+  shuffle,
+  reset,
+  check,
+  onTileTouched,
+}) {
   const squares = [];
   for (let i = 0; i < 64 + 16 /* 80 */; i++) {
     if (i === 77) {
@@ -146,7 +159,13 @@ export default function Board({ tiles, onTileMoved, shuffle, reset, check }) {
       );
     } else {
       squares.push(
-        <SquareWrapper i={i} key={i} tiles={tiles} onTileMoved={onTileMoved} />
+        <SquareWrapper
+          i={i}
+          key={i}
+          tiles={tiles}
+          onTileMoved={onTileMoved}
+          onTileTouched={onTileTouched}
+        />
       );
     }
   }

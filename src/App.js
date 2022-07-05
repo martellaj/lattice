@@ -8,6 +8,7 @@ import getTiles from "./getTiles";
 import Header from "./Header";
 import isInDrawer from "./isInDrawer";
 import DICTIONARY from "./sowpods";
+import IpadModal from "./IpadModal";
 
 // interface TilePositionData = {
 //   letter: string;
@@ -41,6 +42,7 @@ function App() {
   );
 
   const [showCheckModal, setShowCheckModal] = useState(false);
+  const [showIpadModal, setShowIpadModal] = useState(false);
 
   const [gameResult, setGameResult] = useState({});
 
@@ -161,8 +163,10 @@ function App() {
     };
   };
 
+  const onTileTouched = () => setShowIpadModal(true);
+
   return (
-    <div className="App">
+    <div className="App" onClick={() => setShowIpadModal(true)}>
       <Header />
       <Board
         tiles={tiles}
@@ -170,6 +174,7 @@ function App() {
         shuffle={shuffleBoard}
         reset={resetBoard}
         check={showResult}
+        onTileTouched={onTileTouched}
       />
       {showCheckModal && (
         <CheckModal
@@ -178,6 +183,7 @@ function App() {
           tiles={tiles}
         />
       )}
+      {showIpadModal && <IpadModal onClosed={() => setShowIpadModal(false)} />}
     </div>
   );
 }

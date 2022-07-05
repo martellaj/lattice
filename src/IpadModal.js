@@ -2,8 +2,11 @@ import "./HelpModal.css";
 import { Modal } from "semantic-ui-react";
 import { useState } from "react";
 
+// For use within normal web clients
+const isiPad = navigator.userAgent.match(/iPad/i) != null;
+
 function IpadModal(props) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(isiPad);
 
   return (
     <Modal
@@ -25,14 +28,14 @@ function IpadModal(props) {
           paddingBottom: "24px",
         }}
       >
-        We know the drag and drop experience on the iPad is... lacking.
+        We know the drag and drop experience on the iPad is a little awkward.
       </div>
       <div
         style={{
           paddingBottom: "24px",
         }}
       >
-        While we were on fixing it, you just need to hold a little bit longer
+        While we work on fixing it, you just need to hold a little bit longer
         than you'd think you'd need to before dragging a tile and then it'll
         work! 👍
       </div>
