@@ -1,5 +1,5 @@
 const getDailyPuzzleNumber = () => {
-  const refDate = new Date(2022, 6, 3, 0, 0, 0, 0);
+  const refDate = new Date(2022, 6, 4, 0, 0, 0, 0);
   const _date = new Date();
   const val =
     new Date(_date).setHours(0, 0, 0, 0) - refDate.setHours(0, 0, 0, 0);
