@@ -30,11 +30,9 @@ function Header() {
         <Icon
           style={{
             cursor: "pointer",
-            marginRight: "6px",
-            marginLeft: "12px",
           }}
           name="at"
-          className="button headerButton"
+          className="button headerButton rightHeaderButton"
           onClick={() => window.open("mailto:playcladder@gmail.com", "_blank")}
         />
       </div>

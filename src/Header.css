@@ -39,3 +39,7 @@
   font-variant: all-small-caps;
   margin-bottom: 16px;
 }
+
+.rightHeaderButton {
+  margin-right: 6px !important;
+}
