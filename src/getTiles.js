@@ -9,6 +9,9 @@ const bank = [
   /*203,5*/ "DNOWGBTKSNMU",
   /*171,6*/ "ETDUONBRTYBG",
   /*167,7*/ "ALPSILRBGETS",
+  /*311,8*/ "TCHNTNRLOPME",
+  /*304,9*/ "NYCTELKLTNEH",
+  /*303,10*/ "UYCNMWHIERNF",
 ];
 
 const WINNING_TILES = [
