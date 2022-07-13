@@ -29,8 +29,6 @@ function CheckModal({
 
     stars = stars.trim();
   }
-  stars = "aa";
-  starsCount = 1;
 
   let message = "";
   switch (starsCount) {
