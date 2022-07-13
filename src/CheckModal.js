@@ -147,7 +147,7 @@ function CheckModal({
             size="big"
             className="shareButton"
             onClick={() => {
-              let text = `Lattice ${getPuzzleNumber()} ${starsCount}/3 ⭐\n\n${getShareBoard(
+              let text = `#Lattice${getPuzzleNumber()} ${starsCount}/3\n\n${getShareBoard(
                 tiles
               )}\nhttps://playlattice.com`;
 
