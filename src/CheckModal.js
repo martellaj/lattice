@@ -147,10 +147,9 @@ function CheckModal({
             size="big"
             className="shareButton"
             onClick={() => {
-              let text = `Lattice ${getPuzzleNumber()} ${stars.replace(
-                /\s/g,
-                ""
-              )}\n\n${getShareBoard(tiles)}\nhttps://playlattice.com`;
+              let text = `Lattice ${getPuzzleNumber()} ${starsCount}/3 ⭐\n\n${getShareBoard(
+                tiles
+              )}\nhttps://playlattice.com`;
 
               var ua = navigator.userAgent.toLowerCase();
               var isAndroid = ua.indexOf("android") > -1;
