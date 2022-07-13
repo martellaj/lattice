@@ -114,3 +114,9 @@ body {
   flex-direction: row !important;
   width: fit-content;
 }
+
+.badWords {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

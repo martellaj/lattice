@@ -80,7 +80,7 @@ function CheckModal({
             {reason}
           </div>
           {invalidWords && (
-            <div>
+            <div className="badWords">
               {invalidWords.map((word) => (
                 <div key={word} style={{ marginBottom: "12px" }}>
                   {word}
@@ -105,7 +105,11 @@ function CheckModal({
             className="statsRow"
             style={{ marginBottom: "10px", flexDirection: "column" }}
           >
-            <div className="stars">{stars}</div>
+            <div className="stars">
+              <div style={{ marginRight: "6px" }}>⭐️</div>
+              {starsCount >= 2 && <div style={{ marginRight: "6px" }}>⭐️</div>}
+              {starsCount >= 3 && <div style={{ marginRight: "6px" }}>⭐️</div>}
+            </div>
             <div style={{ marginTop: "6px", textAlign: "center" }}>
               {message}
             </div>
