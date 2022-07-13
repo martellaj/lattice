@@ -105,7 +105,7 @@ function CheckModal({
             className="statsRow"
             style={{ marginBottom: "10px", flexDirection: "column" }}
           >
-            <span>{stars}</span>
+            <span style={{ display: "flex" }}>{stars}</span>
             <span style={{ marginTop: "6px", textAlign: "center" }}>
               {message}
             </span>
