@@ -39,7 +39,8 @@ function HelpModal(props) {
       </div>
       <div
         style={{
-          paddingBottom: "24px",
+          paddingBottom: "12px",
+          marginBottom: "12px",
         }}
       >
         Less words means a <strong>higher</strong> score
