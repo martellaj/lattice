@@ -184,7 +184,7 @@ function App() {
   };
 
   const hasSeenIpadModal =
-    window.localStorage.getItem("hasSeenIpadModal") === "true";
+    window.localStorage.getItem("hasSeenIpadModal2") === "true";
   const isiPad = navigator.userAgent.match(/iPad/i) != null;
   const onTileTouched = () => {
     if (!hasSeenIpadModal && isiPad) {

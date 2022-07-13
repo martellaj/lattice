@@ -7,7 +7,7 @@ const isiPad = navigator.userAgent.match(/iPad/i) != null;
 
 function IpadModal(props) {
   const hasSeenIpadModal =
-    window.localStorage.getItem("hasSeenIpadModal") === "true";
+    window.localStorage.getItem("hasSeenIpadModal2") === "true";
 
   const [open, setOpen] = useState(isiPad && !hasSeenIpadModal);
 
@@ -17,7 +17,7 @@ function IpadModal(props) {
       id="helpModalContainer"
       className="helpModalContainer"
       onClose={() => {
-        window.localStorage.setItem("hasSeenIpadModal", true);
+        window.localStorage.setItem("hasSeenIpadModal2", true);
         props.onClosed();
         setOpen(false);
       }}

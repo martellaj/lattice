@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import HelpModal from "./HelpModal";
 import getPuzzleNumber from "./getPuzzleNumber";
 
-const seenHelp = window.localStorage.getItem("seenHelp2");
+const seenHelp = window.localStorage.getItem("seenHelp3");
 
 function Header() {
   const [showHelpModal, setShowHelpModal] = useState(!seenHelp);
 
   useEffect(() => {
-    window.localStorage.setItem("seenHelp2", true);
+    window.localStorage.setItem("seenHelp3", true);
   }, []);
 
   return (

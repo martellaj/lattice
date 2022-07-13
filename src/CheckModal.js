@@ -4,11 +4,47 @@ import { useState } from "react";
 import getPuzzleNumber from "./getPuzzleNumber";
 import copy from "copy-to-clipboard";
 
-function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
+function CheckModal({
+  onClosed,
+  result,
+  reason,
+  invalidWords,
+  tiles,
+  wordResults,
+}) {
   const [open, setOpen] = useState(true);
   const [showCheck, setShowCheck] = useState(false);
 
   const { wins, currentStreak, bestStreak } = getStats();
+
+  let starsCount = 0;
+  let stars = "";
+  if (wordResults) {
+    starsCount = Math.min(3, 6 - wordResults.length);
+    starsCount = Math.max(1, starsCount);
+
+    for (let i = 0; i < starsCount; i++) {
+      stars += "⭐️   ";
+    }
+
+    stars = stars.trim();
+  }
+  stars = "aa";
+  starsCount = 1;
+
+  let message = "";
+  switch (starsCount) {
+    case 1:
+      message = "You solved the puzzle (but you can do it with less words)!";
+      break;
+    case 2:
+      message = "Great work! 1 less word gets you 1 more star!";
+      break;
+    case 3:
+    default:
+      message = "Stellar job! You got the optimal solution!";
+      break;
+  }
 
   return (
     <Modal
@@ -67,6 +103,15 @@ function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
       )}
       {result && (
         <div className="statsContainer">
+          <div
+            className="statsRow"
+            style={{ marginBottom: "10px", flexDirection: "column" }}
+          >
+            <span>{stars}</span>
+            <span style={{ marginTop: "6px", textAlign: "center" }}>
+              {message}
+            </span>
+          </div>
           <div className="statsRow">
             {/* wins */}
             <div className="statsColumn">
@@ -100,9 +145,10 @@ function CheckModal({ onClosed, result, reason, invalidWords, tiles }) {
             size="big"
             className="shareButton"
             onClick={() => {
-              let text = `#Lattice ${getPuzzleNumber()}\n\n${getShareBoard(
-                tiles
-              )}\nhttps://playlattice.com`;
+              let text = `Lattice ${getPuzzleNumber()} ${stars.replace(
+                /\s/g,
+                ""
+              )}\n\n${getShareBoard(tiles)}\nhttps://playlattice.com`;
 
               var ua = navigator.userAgent.toLowerCase();
               var isAndroid = ua.indexOf("android") > -1;
