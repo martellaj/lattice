@@ -105,10 +105,10 @@ function CheckModal({
             className="statsRow"
             style={{ marginBottom: "10px", flexDirection: "column" }}
           >
-            <div style={{ display: "flex", flexDirection: "row" }}>{stars}</div>
-            <span style={{ marginTop: "6px", textAlign: "center" }}>
+            <div className="stars">{stars}</div>
+            <div style={{ marginTop: "6px", textAlign: "center" }}>
               {message}
-            </span>
+            </div>
           </div>
           <div className="statsRow">
             {/* wins */}

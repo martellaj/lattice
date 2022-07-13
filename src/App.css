@@ -108,3 +108,9 @@ body {
   background-color: #3a8b38 !important;
   color: white !important;
 }
+
+.stars {
+  display: flex !important;
+  flex-direction: row !important;
+  width: fit-content;
+}
