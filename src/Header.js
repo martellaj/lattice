@@ -10,7 +10,7 @@ const seenSupporterInfo = window.localStorage.getItem("seenSupporterInfo");
 const isSupporter = window.localStorage.getItem("isSupporter") === "true";
 
 function Header(props) {
-  const { onRandomGameStarted, isRandomGame, resetRandomness } = props;
+  const { onRandomGameStarted, isRandomGame } = props;
 
   const [showHelpModal, setShowHelpModal] = useState(!seenHelp);
   const [showSupporterInfoModal, setShowSupporterInfoModal] = useState(
@@ -46,11 +46,7 @@ function Header(props) {
             }
           />
         </div>
-        <span
-          className="headerText"
-          style={{ paddingBottom: "4px" }}
-          // onClick={resetRandomness}
-        >
+        <span className="headerText" style={{ paddingBottom: "4px" }}>
           lattice {isRandomGame ? "" : `#${getPuzzleNumber()}`}
         </span>
         <div style={{ display: "flex" }}>

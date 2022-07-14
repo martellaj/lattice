@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Board from "./Board";
 import CheckModal from "./CheckModal";
@@ -58,33 +58,39 @@ function App() {
 
   const [gameResult, setGameResult] = useState({});
 
-  const onTileMoved = (dropTarget, letter, x, y, prevX, prevY, id) => {
-    if (dropTarget === "board") {
-      updateTiles((_previousTilePositions) => {
-        let previousTilePositions = [..._previousTilePositions];
+  const onTileMoved = useCallback(
+    (dropTarget, letter, x, y, prevX, prevY, id) => {
+      if (dropTarget === "board") {
+        updateTiles((_previousTilePositions) => {
+          let previousTilePositions = [..._previousTilePositions];
 
-        // remove tile that's changing position
-        previousTilePositions = previousTilePositions.filter(
-          (tile) => tile.id !== id
-        );
-
-        // add tile back (with new position)
-        previousTilePositions.push({ letter: letter, x: x, y: y, id: id });
-
-        // persist
-        if (!isRandomGame) {
-          window.localStorage.setItem(
-            `tiles-${getPuzzleNumber()}`,
-            JSON.stringify(previousTilePositions)
+          // remove tile that's changing position
+          previousTilePositions = previousTilePositions.filter(
+            (tile) => tile.id !== id
           );
-        }
 
-        // setter
-        return [...previousTilePositions];
-      });
-    } else if (dropTarget === "drawer") {
-    }
-  };
+          // add tile back (with new position)
+          previousTilePositions.push({ letter: letter, x: x, y: y, id: id });
+
+          setIsRandomGame((_isRandomGame) => {
+            // persist
+            if (!_isRandomGame) {
+              window.localStorage.setItem(
+                `tiles-${getPuzzleNumber()}`,
+                JSON.stringify(previousTilePositions)
+              );
+            }
+
+            return _isRandomGame;
+          });
+
+          // setter
+          return [...previousTilePositions];
+        });
+      }
+    },
+    []
+  );
 
   const shuffleBoard = () => {
     updateTiles((_previousTiles) => {
@@ -210,12 +216,15 @@ function App() {
     }
   };
 
+  const onRandomGameStarted = useCallback(() => {
+    setIsRandomGame(isRandomGame + 1);
+  }, [isRandomGame]);
+
   return (
     <div className="App">
       <Header
         isRandomGame={isRandomGame}
-        onRandomGameStarted={() => setIsRandomGame(isRandomGame + 1)}
-        resetRandomness={() => setIsRandomGame(0)}
+        onRandomGameStarted={onRandomGameStarted}
       />
       <Board
         tiles={tiles}
