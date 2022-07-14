@@ -11,6 +11,7 @@ function CheckModal({
   invalidWords,
   tiles,
   wordResults,
+  isRandomGame,
 }) {
   const [open, setOpen] = useState(true);
   const [showCheck, setShowCheck] = useState(false);
@@ -114,75 +115,79 @@ function CheckModal({
               {message}
             </div>
           </div>
-          <div className="statsRow">
-            {/* wins */}
-            <div className="statsColumn">
-              <div className="statsIcon">🏆</div>
-              <div className="statsText">wins</div>
-              <div className="statsNumber">{wins}</div>
-            </div>
+          {!isRandomGame && (
+            <div className="statsRow">
+              {/* wins */}
+              <div className="statsColumn">
+                <div className="statsIcon">🏆</div>
+                <div className="statsText">wins</div>
+                <div className="statsNumber">{wins}</div>
+              </div>
 
-            {/* current streak */}
-            <div className="statsColumn" style={{ margin: "0 30px" }}>
-              <div className="statsIcon">🔥</div>
-              <div className="statsText">streak</div>
-              <div className="statsSubtext">(current)</div>
-              <div className="statsNumber">{currentStreak}</div>
-            </div>
+              {/* current streak */}
+              <div className="statsColumn" style={{ margin: "0 30px" }}>
+                <div className="statsIcon">🔥</div>
+                <div className="statsText">streak</div>
+                <div className="statsSubtext">(current)</div>
+                <div className="statsNumber">{currentStreak}</div>
+              </div>
 
-            {/* best streak */}
-            <div className="statsColumn">
-              <div className="statsIcon">💯</div>
-              <div className="statsText">streak</div>
-              <div className="statsSubtext">(best)</div>
-              <div className="statsNumber">{bestStreak}</div>
+              {/* best streak */}
+              <div className="statsColumn">
+                <div className="statsIcon">💯</div>
+                <div className="statsText">streak</div>
+                <div className="statsSubtext">(best)</div>
+                <div className="statsNumber">{bestStreak}</div>
+              </div>
             </div>
-          </div>
+          )}
 
           <pre className="foo" style={{ overflow: "hidden" }}>
             {getShareBoard(tiles)}
           </pre>
 
-          <Button
-            size="big"
-            className="shareButton"
-            onClick={() => {
-              let text = `#Lattice${getPuzzleNumber()} ${starsCount}/3\n\n${getShareBoard(
-                tiles
-              )}\nhttps://playlattice.com`;
+          {!isRandomGame && (
+            <Button
+              size="big"
+              className="shareButton"
+              onClick={() => {
+                let text = `#Lattice${getPuzzleNumber()} ${starsCount}/3\n\n${getShareBoard(
+                  tiles
+                )}\nhttps://playlattice.com`;
 
-              var ua = navigator.userAgent.toLowerCase();
-              var isAndroid = ua.indexOf("android") > -1;
+                var ua = navigator.userAgent.toLowerCase();
+                var isAndroid = ua.indexOf("android") > -1;
 
-              const isIos =
-                [
-                  "iPad Simulator",
-                  "iPhone Simulator",
-                  "iPod Simulator",
-                  "iPad",
-                  "iPhone",
-                  "iPod",
-                ].includes(navigator.platform) ||
-                // iPad on iOS 13 detection
-                (navigator.userAgent.includes("Mac") &&
-                  "ontouchend" in document);
+                const isIos =
+                  [
+                    "iPad Simulator",
+                    "iPhone Simulator",
+                    "iPod Simulator",
+                    "iPad",
+                    "iPhone",
+                    "iPod",
+                  ].includes(navigator.platform) ||
+                  // iPad on iOS 13 detection
+                  (navigator.userAgent.includes("Mac") &&
+                    "ontouchend" in document);
 
-              if (isIos || isAndroid) {
-                navigator.share({
-                  text: text,
-                });
-              } else {
-                copy(text);
+                if (isIos || isAndroid) {
+                  navigator.share({
+                    text: text,
+                  });
+                } else {
+                  copy(text);
 
-                setShowCheck(true);
-                setTimeout(() => {
-                  setShowCheck(false);
-                }, 2000);
-              }
-            }}
-          >
-            {showCheck ? "copied!" : "share"}
-          </Button>
+                  setShowCheck(true);
+                  setTimeout(() => {
+                    setShowCheck(false);
+                  }, 2000);
+                }
+              }}
+            >
+              {showCheck ? "copied!" : "share"}
+            </Button>
+          )}
         </div>
       )}
     </Modal>

@@ -43,3 +43,23 @@
 .rightHeaderButton {
   margin-right: 6px !important;
 }
+
+.randomButton {
+  background-color: #4c467a !important;
+}
+
+#donateButton {
+  margin: 12px;
+  width: 265px;
+  font-size: 24px;
+  height: 50px;
+  padding: 0;
+  font-family: "Roboto Mono", monospace !important;
+}
+
+.unlockButton {
+  padding: 6px !important;
+  font-size: 24px !important;
+  height: 40px !important;
+  font-family: "Roboto Mono", monospace !important;
+}

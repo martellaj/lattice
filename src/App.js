@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Board from "./Board";
 import CheckModal from "./CheckModal";
 import getDailyPuzzleNumber from "./getDailyPuzzleNumber";
 import getPuzzleNumber from "./getPuzzleNumber";
-import getTiles from "./getTiles";
+import getTiles, { getRandomTiles } from "./getTiles";
 import Header from "./Header";
 import isInDrawer from "./isInDrawer";
 import DICTIONARY from "./sowpods";
@@ -44,6 +44,20 @@ function App() {
   const [showCheckModal, setShowCheckModal] = useState(false);
   const [showIpadModal, setShowIpadModal] = useState(false);
 
+  // 0 will be the off state
+  // any number means we're in random mode
+  const [isRandomGame, setIsRandomGame] = useState(0);
+
+  useEffect(() => {
+    if (isRandomGame > 0) {
+      updateTiles(getRandomTiles());
+    } else {
+      updateTiles(
+        getTiles(getPuzzleNumber(), TILES_OVERRIDE, true /* skipCache */)
+      );
+    }
+  }, [isRandomGame]);
+
   const [gameResult, setGameResult] = useState({});
 
   const onTileMoved = (dropTarget, letter, x, y, prevX, prevY, id) => {
@@ -60,10 +74,12 @@ function App() {
         previousTilePositions.push({ letter: letter, x: x, y: y, id: id });
 
         // persist
-        window.localStorage.setItem(
-          `tiles-${getPuzzleNumber()}`,
-          JSON.stringify(previousTilePositions)
-        );
+        if (!isRandomGame) {
+          window.localStorage.setItem(
+            `tiles-${getPuzzleNumber()}`,
+            JSON.stringify(previousTilePositions)
+          );
+        }
 
         // setter
         return [...previousTilePositions];
@@ -86,10 +102,12 @@ function App() {
       // shuffle the tiles
       shuffleArray(drawerTiles);
 
-      window.localStorage.setItem(
-        `tiles-${getPuzzleNumber()}`,
-        JSON.stringify([...boardTiles, ...drawerTiles])
-      );
+      if (!isRandomGame) {
+        window.localStorage.setItem(
+          `tiles-${getPuzzleNumber()}`,
+          JSON.stringify([...boardTiles, ...drawerTiles])
+        );
+      }
 
       // setter
       return [...boardTiles, ...drawerTiles];
@@ -97,16 +115,16 @@ function App() {
   };
 
   const resetBoard = () => {
-    const defaultTiles = getTiles(
-      getPuzzleNumber(),
-      TILES_OVERRIDE,
-      true /* skipCache */
-    );
+    const defaultTiles = isRandomGame
+      ? getRandomTiles(true /* useCache */)
+      : getTiles(getPuzzleNumber(), TILES_OVERRIDE, true /* skipCache */);
 
-    window.localStorage.setItem(
-      `tiles-${getPuzzleNumber()}`,
-      JSON.stringify(defaultTiles)
-    );
+    if (!isRandomGame) {
+      window.localStorage.setItem(
+        `tiles-${getPuzzleNumber()}`,
+        JSON.stringify(defaultTiles)
+      );
+    }
 
     updateTiles(() => [...defaultTiles]);
   };
@@ -175,7 +193,9 @@ function App() {
       };
     }
 
-    window.localStorage.setItem(`puzzle-${getPuzzleNumber()}`, "true");
+    if (!isRandomGame) {
+      window.localStorage.setItem(`puzzle-${getPuzzleNumber()}`, "true");
+    }
 
     return {
       result: true,
@@ -194,7 +214,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header
+        isRandomGame={isRandomGame}
+        onRandomGameStarted={() => setIsRandomGame(isRandomGame + 1)}
+        resetRandomness={() => setIsRandomGame(0)}
+      />
       <Board
         tiles={tiles}
         onTileMoved={onTileMoved}
@@ -208,6 +232,7 @@ function App() {
           onClosed={() => setShowCheckModal(false)}
           {...gameResult}
           tiles={tiles}
+          isRandomGame={isRandomGame}
         />
       )}
       {showIpadModal && !hasSeenIpadModal && (

@@ -2,12 +2,20 @@ import "./Header.css";
 import { Icon } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import HelpModal from "./HelpModal";
+import SupporterInfoModal from "./SupporterInfoModal";
 import getPuzzleNumber from "./getPuzzleNumber";
 
 const seenHelp = window.localStorage.getItem("seenHelp3");
+const seenSupporterInfo = window.localStorage.getItem("seenSupporterInfo");
+const isSupporter = window.localStorage.getItem("isSupporter") === "true";
 
-function Header() {
+function Header(props) {
+  const { onRandomGameStarted, isRandomGame, resetRandomness } = props;
+
   const [showHelpModal, setShowHelpModal] = useState(!seenHelp);
+  const [showSupporterInfoModal, setShowSupporterInfoModal] = useState(
+    seenHelp && !seenSupporterInfo && !isSupporter
+  );
 
   useEffect(() => {
     window.localStorage.setItem("seenHelp3", true);
@@ -16,29 +24,67 @@ function Header() {
   return (
     <>
       <div className="headerContainer">
-        <Icon
-          style={{
-            cursor: "pointer",
-            marginRight: "12px",
-            marginLeft: "6px",
-          }}
-          name="help"
-          className="button headerButton"
-          onClick={() => setShowHelpModal(true)}
-        />
-        <span className="headerText">lattice #{getPuzzleNumber()}</span>
-        <Icon
-          style={{
-            cursor: "pointer",
-          }}
-          name="at"
-          className="button headerButton rightHeaderButton"
-          onClick={() =>
-            window.open("mailto:lattice.feedback@gmail.com", "_blank")
-          }
-        />
+        <div style={{ display: "flex" }}>
+          <Icon
+            style={{
+              cursor: "pointer",
+              marginRight: "0px !important",
+              marginLeft: "6px",
+            }}
+            name="help"
+            className="button headerButton"
+            onClick={() => setShowHelpModal(true)}
+          />
+          <Icon
+            style={{
+              cursor: "pointer",
+            }}
+            name="at"
+            className="button headerButton rightHeaderButton"
+            onClick={() =>
+              window.open("mailto:lattice.feedback@gmail.com", "_blank")
+            }
+          />
+        </div>
+        <span
+          className="headerText"
+          style={{ cursor: "pointer", paddingBottom: "4px" }}
+          onClick={resetRandomness}
+        >
+          lattice {isRandomGame ? "" : `#${getPuzzleNumber()}`}
+        </span>
+        <div style={{ display: "flex" }}>
+          <Icon
+            style={{
+              cursor: "pointer",
+              visibility: "hidden",
+            }}
+            name="at"
+            className="button headerButton rightHeaderButton"
+            onClick={() =>
+              window.open("mailto:lattice.feedback@gmail.com", "_blank")
+            }
+          />
+          <Icon
+            style={{
+              cursor: "pointer",
+            }}
+            name="random"
+            className="button headerButton rightHeaderButton randomButton"
+            onClick={() => {
+              if (isSupporter) {
+                onRandomGameStarted();
+              } else {
+                setShowSupporterInfoModal(true);
+              }
+            }}
+          />
+        </div>
       </div>
       {showHelpModal && <HelpModal onClosed={() => setShowHelpModal(false)} />}
+      {showSupporterInfoModal && (
+        <SupporterInfoModal onClosed={() => setShowSupporterInfoModal(false)} />
+      )}
     </>
   );
 }

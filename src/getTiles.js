@@ -1,5 +1,20 @@
 const ROWS_COUNT = 8;
 
+const DICE_LETTERS = [
+  ["M", "M", "L", "L", "B", "Y"],
+  ["V", "F", "G", "K", "P", "P"],
+  ["H", "H", "N", "N", "R", "R"],
+  ["D", "F", "R", "L", "L", "W"],
+  ["R", "R", "D", "L", "G", "G"],
+  ["X", "K", "B", "S", "Z", "N"],
+  ["W", "H", "H", "T", "T", "P"],
+  ["C", "C", "B", "T", "J", "D"],
+  ["C", "C", "M", "T", "T", "S"],
+  ["O", "L", "I", "N", "N", "Y"],
+  ["A", "E", "I", "O", "U", "U"],
+  ["A", "A", "E", "E", "O", "O"],
+];
+
 const bank = [
   /*269,0*/ "RFHTBMLHTEOI",
   /*269,1*/ "RFHTBMLHTEOI",
@@ -132,4 +147,28 @@ function guid() {
       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16)
   );
+}
+
+let randomTiles = [];
+export function getRandomTiles(useCache) {
+  if (useCache) {
+    return randomTiles;
+  }
+
+  const tiles = [];
+
+  for (let i = 0; i < 12; i++) {
+    tiles.push({
+      id: guid(),
+      x: (64 + i) % ROWS_COUNT,
+      y: Math.floor((64 + i) / ROWS_COUNT),
+      letter:
+        DICE_LETTERS[i][Math.floor(Math.random() * DICE_LETTERS[i].length)],
+    });
+  }
+
+  // update cache
+  randomTiles = tiles;
+
+  return tiles;
 }
