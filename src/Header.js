@@ -48,8 +48,8 @@ function Header(props) {
         </div>
         <span
           className="headerText"
-          style={{ cursor: "pointer", paddingBottom: "4px" }}
-          onClick={resetRandomness}
+          style={{ paddingBottom: "4px" }}
+          // onClick={resetRandomness}
         >
           lattice {isRandomGame ? "" : `#${getPuzzleNumber()}`}
         </span>

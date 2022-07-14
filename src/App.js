@@ -52,9 +52,7 @@ function App() {
     if (isRandomGame > 0) {
       updateTiles(getRandomTiles());
     } else {
-      updateTiles(
-        getTiles(getPuzzleNumber(), TILES_OVERRIDE, true /* skipCache */)
-      );
+      updateTiles(getTiles(getPuzzleNumber(), TILES_OVERRIDE));
     }
   }, [isRandomGame]);
 
