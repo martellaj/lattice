@@ -25,6 +25,8 @@ window.localStorage.setItem(
   params?.p || getDailyPuzzleNumber()
 );
 
+window.localStorage.setItem("fromCladder", params?.fromCladder || false);
+
 // set the app height for mobile
 const appHeight = () =>
   document.documentElement.style.setProperty(

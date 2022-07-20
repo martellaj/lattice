@@ -115,36 +115,6 @@ function CheckModal({
               {message}
             </div>
           </div>
-          {!isRandomGame && (
-            <div className="statsRow">
-              {/* wins */}
-              <div className="statsColumn">
-                <div className="statsIcon">🏆</div>
-                <div className="statsText">wins</div>
-                <div className="statsNumber">{wins}</div>
-              </div>
-
-              {/* current streak */}
-              <div className="statsColumn" style={{ margin: "0 30px" }}>
-                <div className="statsIcon">🔥</div>
-                <div className="statsText">streak</div>
-                <div className="statsSubtext">(current)</div>
-                <div className="statsNumber">{currentStreak}</div>
-              </div>
-
-              {/* best streak */}
-              <div className="statsColumn">
-                <div className="statsIcon">💯</div>
-                <div className="statsText">streak</div>
-                <div className="statsSubtext">(best)</div>
-                <div className="statsNumber">{bestStreak}</div>
-              </div>
-            </div>
-          )}
-
-          <pre className="foo" style={{ overflow: "hidden" }}>
-            {getShareBoard(tiles)}
-          </pre>
 
           {!isRandomGame && (
             <Button
@@ -188,6 +158,71 @@ function CheckModal({
               {showCheck ? "copied!" : "share"}
             </Button>
           )}
+
+          {!isRandomGame && (
+            <div className="statsRow">
+              {/* wins */}
+              <div className="statsColumn">
+                <div className="statsIcon">🏆</div>
+                <div className="statsText">wins</div>
+                <div className="statsNumber">{wins}</div>
+              </div>
+
+              {/* current streak */}
+              <div className="statsColumn" style={{ margin: "0 30px" }}>
+                <div className="statsIcon">🔥</div>
+                <div className="statsText">streak</div>
+                <div className="statsSubtext">(current)</div>
+                <div className="statsNumber">{currentStreak}</div>
+              </div>
+
+              {/* best streak */}
+              <div className="statsColumn">
+                <div className="statsIcon">💯</div>
+                <div className="statsText">streak</div>
+                <div className="statsSubtext">(best)</div>
+                <div className="statsNumber">{bestStreak}</div>
+              </div>
+            </div>
+          )}
+
+          {false && (
+            <pre className="foo" style={{ overflow: "hidden" }}>
+              {getShareBoard(tiles)}
+            </pre>
+          )}
+
+          {!isRandomGame &&
+            window.localStorage.getItem("fromCladder") === "false" && (
+              <div
+                onClick={() =>
+                  window.open(
+                    "https://playcladder.com?fromLattice=true",
+                    "_blank"
+                  )
+                }
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  backgroundColor: "#5fbd72",
+                  color: "white",
+                  borderRadius: "5px",
+                  padding: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <div style={{ fontSize: "30px", marginBottom: "6px" }}>
+                  Play Cladder
+                </div>
+                <div style={{ fontSize: "20px", marginBottom: "12px" }}>
+                  Can you solve all 10 clues before the timer runs out?!
+                </div>
+              </div>
+            )}
         </div>
       )}
     </Modal>

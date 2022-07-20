@@ -107,6 +107,7 @@ body {
 .shareButton {
   background-color: #3a8b38 !important;
   color: white !important;
+  margin: 12px 0px !important;
 }
 
 .stars {
