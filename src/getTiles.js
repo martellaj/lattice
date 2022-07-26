@@ -39,6 +39,7 @@ const bank = [
   /*203,20,07/24*/ "DNOWGBTKSNMU",
   /*337,21,07/25*/ "AFOCRWFBLBLY", // LOWLY, CRABBY, OFF
   /*385,22,07/26*/ "GOWTWMUNKPES",
+  /*179,2*/ "NPIBODFBWGMA",
 ];
 
 const WINNING_TILES = [
