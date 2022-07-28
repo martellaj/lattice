@@ -41,6 +41,7 @@ const bank = [
   /*385,22,07/26*/ "GOWTWMUNKPES",
   /*179,2*/ "NPIBODFBWGMA",
   /*167,24,07/28*/ "ALPSILRBGETS",
+  /*xxx,25,07/29*/ "CYNDMEINRHOP", // PINCER, HID, MONEY
 ];
 
 const WINNING_TILES = [
