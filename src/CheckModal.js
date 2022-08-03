@@ -1,8 +1,10 @@
 import "./HelpModal.css";
 import { Modal, Icon, Button } from "semantic-ui-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getPuzzleNumber from "./getPuzzleNumber";
 import copy from "copy-to-clipboard";
+
+const trackedGames = [];
 
 function CheckModal({
   onClosed,
@@ -15,8 +17,31 @@ function CheckModal({
 }) {
   const [open, setOpen] = useState(true);
   const [showCheck, setShowCheck] = useState(false);
+  const [actualWinCount, setActualWinCount] = useState(
+    window.localStorage.getItem("wins") || "0"
+  );
 
   const { wins, currentStreak, bestStreak } = getStats();
+
+  useEffect(() => {
+    if (result) {
+      if (trackedGames.includes(isRandomGame)) {
+        return;
+      } else {
+        trackedGames.push(isRandomGame);
+      }
+
+      const winsValue = window.localStorage.getItem("wins");
+
+      if (winsValue) {
+        window.localStorage.setItem("wins", parseInt(winsValue) + 1);
+      } else {
+        window.localStorage.setItem("wins", wins + 1);
+      }
+
+      setActualWinCount(window.localStorage.getItem("wins"));
+    }
+  }, []);
 
   let starsCount = 0;
   let stars = "";
@@ -159,30 +184,28 @@ function CheckModal({
             </Button>
           )}
 
-          {!isRandomGame && (
+          {isRandomGame && (
             <div className="statsRow">
               {/* wins */}
               <div className="statsColumn">
                 <div className="statsIcon">🏆</div>
                 <div className="statsText">wins</div>
-                <div className="statsNumber">{wins}</div>
+                <div className="statsNumber">{actualWinCount}</div>
               </div>
 
-              {/* current streak */}
-              <div className="statsColumn" style={{ margin: "0 30px" }}>
+              {/* <div className="statsColumn" style={{ margin: "0 30px" }}>
                 <div className="statsIcon">🔥</div>
                 <div className="statsText">streak</div>
                 <div className="statsSubtext">(current)</div>
                 <div className="statsNumber">{currentStreak}</div>
               </div>
 
-              {/* best streak */}
               <div className="statsColumn">
                 <div className="statsIcon">💯</div>
                 <div className="statsText">streak</div>
                 <div className="statsSubtext">(best)</div>
                 <div className="statsNumber">{bestStreak}</div>
-              </div>
+              </div> */}
             </div>
           )}
 
@@ -192,7 +215,43 @@ function CheckModal({
             </pre>
           )}
 
-          {!isRandomGame &&
+          <div
+            style={{
+              marginTop: "24px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* <div style={{ textAlign: "center" }}>
+              Enjoying Lattice? Consider buying me a cup of coffee. ☕
+            </div> */}
+            <img
+              src="/yellow-button.png"
+              style={{
+                width: "60%",
+                margin: "6px 0px 0px 0px",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                window.open("https://www.buymeacoffee.com/lattice", "_blank");
+              }}
+            />
+            {/* <Button
+              id="donateButton"
+              className="button active"
+              size="large"
+              color="purple"
+              onClick={() => {
+                window.open("https://www.buymeacoffee.com/lattice", "_blank");
+              }}
+            >
+              SUPPORT
+            </Button> */}
+          </div>
+
+          {/* {isRandomGame &&
             window.localStorage.getItem("fromCladder") === "false" && (
               <div
                 onClick={() =>
@@ -222,7 +281,7 @@ function CheckModal({
                   Can you solve all 10 clues before the timer runs out?!
                 </div>
               </div>
-            )}
+            )} */}
         </div>
       )}
     </Modal>

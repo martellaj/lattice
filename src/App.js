@@ -48,7 +48,7 @@ function App() {
 
   // 0 will be the off state
   // any number means we're in random mode
-  const [isRandomGame, setIsRandomGame] = useState(0);
+  const [isRandomGame, setIsRandomGame] = useState(1);
 
   useEffect(() => {
     if (isRandomGame > 0) {
@@ -181,7 +181,7 @@ function App() {
     for (const word of words) {
       wordResults.push({
         word: word,
-        isValid: DICTIONARY.includes(word),
+        isValid: true, // DICTIONARY.includes(word),
       });
     }
 

@@ -5,7 +5,7 @@ import HelpModal from "./HelpModal";
 import SupporterInfoModal from "./SupporterInfoModal";
 import getPuzzleNumber from "./getPuzzleNumber";
 
-const seenHelp = window.localStorage.getItem("seenHelp3");
+const seenHelp = window.localStorage.getItem("seenHelp4");
 const seenSupporterInfo = window.localStorage.getItem("seenSupporterInfo");
 const isSupporter = window.localStorage.getItem("isSupporter") === "true";
 
@@ -18,7 +18,7 @@ function Header(props) {
   );
 
   useEffect(() => {
-    window.localStorage.setItem("seenHelp3", true);
+    window.localStorage.setItem("seenHelp4", true);
   }, []);
 
   return (
@@ -68,19 +68,12 @@ function Header(props) {
             name="random"
             className="button headerButton rightHeaderButton randomButton"
             onClick={() => {
-              if (isSupporter) {
-                onRandomGameStarted();
-              } else {
-                setShowSupporterInfoModal(true);
-              }
+              onRandomGameStarted();
             }}
           />
         </div>
       </div>
       {showHelpModal && <HelpModal onClosed={() => setShowHelpModal(false)} />}
-      {showSupporterInfoModal && (
-        <SupporterInfoModal onClosed={() => setShowSupporterInfoModal(false)} />
-      )}
     </>
   );
 }

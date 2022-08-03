@@ -24,39 +24,105 @@ function HelpModal(props) {
           borderBottom: "1px solid #6c6c6c",
           paddingBottom: "24px",
           width: "100%",
+          marginBottom: "12px",
         }}
       >
-        <strong>Lattice</strong> is a solo Scrabble challenge
+        <strong>
+          Use all 12 tiles to make words that cross (a la Scrabble)
+        </strong>
+      </div>
+      {/* <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "24px",
+          marginBottom: "12px",
+          width: "100%",
+        }}
+      >
+        Less words means a <strong>higher</strong> score
+      </div> */}
+      <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "12px",
+          marginBottom: "12px",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <img
+          src="/new-tiles.png"
+          style={{
+            width: "50px",
+            margin: "6px 12px 0px 0px",
+            cursor: "pointer",
+          }}
+        />
+        Tap to get a new set of 12 tiles
       </div>
       <div
         style={{
           borderBottom: "1px solid #6c6c6c",
-          paddingBottom: "24px",
+          paddingBottom: "12px",
+          marginBottom: "12px",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
           width: "100%",
         }}
       >
-        Use all <strong>12 tiles</strong> to make words that cross
+        <img
+          src="/shuffle-tiles.png"
+          style={{
+            width: "50px",
+            margin: "6px 12px 0px 0px",
+            cursor: "pointer",
+          }}
+        />
+        Tap to shuffle the tiles left in your drawer
+      </div>
+      <div
+        style={{
+          borderBottom: "1px solid #6c6c6c",
+          paddingBottom: "12px",
+          marginBottom: "12px",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <img
+          src="/clear-tiles.png"
+          style={{
+            width: "50px",
+            margin: "6px 12px 0px 0px",
+            cursor: "pointer",
+          }}
+        />
+        Tap to clear the tiles from the board
       </div>
       <div
         style={{
           paddingBottom: "12px",
           marginBottom: "12px",
-        }}
-      >
-        Less words means a <strong>higher</strong> score
-      </div>
-      <div
-        style={{
-          paddingBottom: "24px",
-          borderBottom: "1px solid #6c6c6c",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
           width: "100%",
         }}
       >
-        ⭐️ Can you earn all <strong>3 stars</strong>? ⭐️
-      </div>
-
-      <div>
-        New Lattice at <strong>midnight</strong>
+        <img
+          src="/check-tiles.png"
+          style={{
+            width: "50px",
+            margin: "6px 12px 0px 0px",
+            cursor: "pointer",
+          }}
+        />
+        Tap to check your solution
       </div>
     </Modal>
   );
