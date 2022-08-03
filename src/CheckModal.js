@@ -230,7 +230,7 @@ function CheckModal({
             <img
               src="/yellow-button.png"
               style={{
-                width: "60%",
+                width: "200px",
                 margin: "6px 0px 0px 0px",
                 cursor: "pointer",
               }}
