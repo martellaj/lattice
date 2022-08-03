@@ -181,7 +181,7 @@ function App() {
     for (const word of words) {
       wordResults.push({
         word: word,
-        isValid: true, // DICTIONARY.includes(word),
+        isValid: DICTIONARY.includes(word),
       });
     }
 
