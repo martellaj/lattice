@@ -4,7 +4,7 @@ import Board from "./Board";
 import CheckModal from "./CheckModal";
 import getDailyPuzzleNumber from "./getDailyPuzzleNumber";
 import getPuzzleNumber from "./getPuzzleNumber";
-import getTiles, { getRandomTiles } from "./getTiles";
+import getTiles, { getRandomTiles, getTilesFromQueryParam } from "./getTiles";
 import Header from "./Header";
 import isInDrawer from "./isInDrawer";
 import DICTIONARY from "./sowpods";
@@ -52,7 +52,11 @@ function App() {
 
   useEffect(() => {
     if (isRandomGame > 0) {
-      updateTiles(getRandomTiles());
+      if (params.tiles) {
+        updateTiles(getTilesFromQueryParam(params.tiles));
+      } else {
+        updateTiles(getRandomTiles());
+      }
     } else {
       updateTiles(getTiles(getPuzzleNumber(), TILES_OVERRIDE));
     }
@@ -122,7 +126,9 @@ function App() {
 
   const resetBoard = () => {
     const defaultTiles = isRandomGame
-      ? getRandomTiles(true /* useCache */)
+      ? params.tiles
+        ? getTilesFromQueryParam(params.tiles)
+        : getRandomTiles(true /* useCache */)
       : getTiles(getPuzzleNumber(), TILES_OVERRIDE, true /* skipCache */);
 
     if (!isRandomGame) {
@@ -227,6 +233,7 @@ function App() {
       <Header
         isRandomGame={isRandomGame}
         onRandomGameStarted={onRandomGameStarted}
+        tiles={tiles}
       />
       <Board
         tiles={tiles}

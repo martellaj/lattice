@@ -192,3 +192,18 @@ export function getRandomTiles(useCache) {
 
   return tiles;
 }
+
+export function getTilesFromQueryParam(letters) {
+  const tiles = [];
+
+  for (let i = 0; i < 12; i++) {
+    tiles.push({
+      id: guid(),
+      x: (64 + i) % ROWS_COUNT,
+      y: Math.floor((64 + i) / ROWS_COUNT),
+      letter: letters[i],
+    });
+  }
+
+  return tiles;
+}

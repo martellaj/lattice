@@ -107,6 +107,7 @@ function HelpModal(props) {
       <div
         style={{
           paddingBottom: "12px",
+          borderBottom: "1px solid #6c6c6c",
           marginBottom: "12px",
           display: "flex",
           justifyContent: "flex-start",
@@ -123,6 +124,27 @@ function HelpModal(props) {
           }}
         />
         Tap to check your solution
+      </div>
+      <div
+        style={{
+          paddingBottom: "12px",
+          borderBottom: "1px solid #6c6c6c",
+          marginBottom: "12px",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <img
+          src="/share-tiles.png"
+          style={{
+            width: "50px",
+            margin: "6px 12px 0px 0px",
+            cursor: "pointer",
+          }}
+        />
+        Tap to share the current puzzle with a friend
       </div>
     </Modal>
   );

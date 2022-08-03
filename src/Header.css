@@ -48,6 +48,10 @@
   background-color: #4c467a !important;
 }
 
+.shareButton {
+  background-color: #e07b53 !important;
+}
+
 #donateButton {
   margin: 12px;
   width: 265px;
