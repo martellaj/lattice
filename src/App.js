@@ -39,9 +39,7 @@ appHeight();
 const TILES_OVERRIDE = false;
 
 function App() {
-  const [tiles, updateTiles] = useState(
-    getTiles(getPuzzleNumber(), TILES_OVERRIDE)
-  );
+  const [tiles, updateTiles] = useState(null);
 
   const [showCheckModal, setShowCheckModal] = useState(false);
   const [showIpadModal, setShowIpadModal] = useState(false);
@@ -227,6 +225,10 @@ function App() {
   const onRandomGameStarted = useCallback(() => {
     setIsRandomGame(isRandomGame + 1);
   }, [isRandomGame]);
+
+  if (!tiles) {
+    return null;
+  }
 
   return (
     <div className="App">
